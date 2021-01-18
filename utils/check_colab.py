@@ -1,9 +1,9 @@
-from google.colab import drive
 from pathlib import Path
 import os
 
 def set_datapath(default_path):
     if 'google.colab' in str(get_ipython()):
+        from google.colab import drive
         IS_COLAB = True
         if not os.path.isdir('/gdrive'):
             drive.mount('/gdrive')
