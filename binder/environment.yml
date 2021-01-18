@@ -14,7 +14,7 @@ dependencies:
   - pandas
   - pip
   - jupyter
-  - jupyterlab
+  - jupyterlab=2.*
   - jupyter_contrib_nbextensions
   - ipywidgets
   - seaborn
@@ -22,6 +22,7 @@ dependencies:
   - plotly=4.14.1
   - plotly-orca
   - captum
+  - nodejs
   - pip:
     - tqdm
     - opencv-python
