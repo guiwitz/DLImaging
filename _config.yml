@@ -1,0 +1,6 @@
+# Book settings
+title: Deep Learning for imaging
+author: Guillaume Witz
+#logo: 'logo.png'
+execute:
+  execute_notebooks: "off"

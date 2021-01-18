@@ -1,0 +1,11 @@
+- file: 01-Basics_image_processing.ipynb
+#- file: 02-Simple_inference_vgg16
+#- file: 03-Simple_NN
+#- file: 04-Tensors
+#- file: 05-Training
+#- file: 06-Augmentation
+#- file: 07-Data_handling
+#- file: 08-Lightning
+#- file: 09-Convolutions
+#- file: 10-Segmentation
+#- file: 11-Unet
