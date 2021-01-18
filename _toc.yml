@@ -1,4 +1,4 @@
-- file: 01-Basics_image_processing.ipynb
+- file: notebooks/01-Basics_image_processing
 #- file: 02-Simple_inference_vgg16
 #- file: 03-Simple_NN
 #- file: 04-Tensors
