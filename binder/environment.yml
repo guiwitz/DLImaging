@@ -27,3 +27,4 @@ dependencies:
     - tqdm
     - opencv-python
     - psutil
+    - jedi==0.17.2
