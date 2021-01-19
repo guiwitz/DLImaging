@@ -1,7 +1,7 @@
 - file: notebooks/01-Basics_image_processing
 - file: notebooks/02-Simple_inference_vgg16
 - file: notebooks/03-Tensors
-#- file: notebooks/04-Simple_NN
+- file: notebooks/04-Simple_NN
 #- file: 05-Training
 #- file: 06-Augmentation
 #- file: 07-Data_handling
