@@ -45,6 +45,8 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -88,6 +90,19 @@
   </a>
  </li>
 </ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/02-Simple_inference_vgg16.html">
+   2. Very accessible deep learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/03-Tensors.html">
+   3. Tensor calculations
+  </a>
+ </li>
+</ul>
+
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -177,7 +192,8 @@
         
               <div>
                 
-  <div class="section" id="deep-learning-for-imaging">
+  <p><a class="reference external" href="https://colab.research.google.com/github/guiwitz/DLImaging/blob/master"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="section" id="deep-learning-for-imaging">
 <h1>Deep Learning for imaging<a class="headerlink" href="#deep-learning-for-imaging" title="Permalink to this headline">¶</a></h1>
 <p>The repository is a course on Deep Learning in imaging based on the PyTorch and PyTorch Lightning packages. The audience of the course should be familiar with Python as well as with concepts of Machine and Deep Learning.  The course takes a very practical approach, showing all the steps necessary to create, train and use a Deep Learning  Neural Network (NN), the goal being to better understand the requirements, problems and challenges one can face even when <em>just using</em> such a NN. The course builds incrementally:</p>
 <ol class="simple">

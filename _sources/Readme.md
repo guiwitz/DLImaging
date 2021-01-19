@@ -1,3 +1,4 @@
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/guiwitz/DLImaging/blob/master)
 # Deep Learning for imaging
 
 The repository is a course on Deep Learning in imaging based on the PyTorch and PyTorch Lightning packages. The audience of the course should be familiar with Python as well as with concepts of Machine and Deep Learning.  The course takes a very practical approach, showing all the steps necessary to create, train and use a Deep Learning  Neural Network (NN), the goal being to better understand the requirements, problems and challenges one can face even when *just using* such a NN. The course builds incrementally:
