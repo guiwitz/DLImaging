@@ -4,8 +4,8 @@
 - file: notebooks/03-Tensors
 - file: notebooks/04-Simple_NN
 - file: notebooks/05-Training
-- file: notebooks/06-Augmentation
-- file: notebooks/07-Data_handling
+- file: notebooks/06-Data_handling
+- file: notebooks/07-Augmentation
 - file: notebooks/08-Lightning
 #- file: 09-Convolutions
 #- file: 10-Segmentation
