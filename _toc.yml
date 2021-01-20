@@ -1,11 +1,12 @@
+- file: Readme
 - file: notebooks/01-Basics_image_processing
 - file: notebooks/02-Simple_inference_vgg16
 - file: notebooks/03-Tensors
 - file: notebooks/04-Simple_NN
-#- file: 05-Training
-#- file: 06-Augmentation
-#- file: 07-Data_handling
-#- file: 08-Lightning
+- file: notebooks/05-Training
+- file: notebooks/06-Augmentation
+- file: notebooks/07-Data_handling
+- file: notebooks/08-Lightning
 #- file: 09-Convolutions
 #- file: 10-Segmentation
 #- file: 11-Unet
