@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Handling images in Python &#8212; Deep Learning for imaging</title>
+    <title>1. Basics of image handling and processing &#8212; Deep Learning for imaging</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,6 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Very accessible deep learning" href="02-Simple_inference_vgg16.html" />
+    <link rel="prev" title="Deep Learning for imaging" href="../Readme.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -85,13 +86,18 @@
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="reference internal" href="#">
-   Handling images in Python
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Readme.html">
+   Deep Learning for imaging
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Basics of image handling and processing
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02-Simple_inference_vgg16.html">
    2. Very accessible deep learning
@@ -100,6 +106,21 @@
  <li class="toctree-l1">
   <a class="reference internal" href="03-Tensors.html">
    3. Tensor calculations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Simple_NN.html">
+   4. Simple neural net with PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Training.html">
+   5. Training a network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Lightning.html">
+   8. Simplifying code with PyTorch-Lightning
   </a>
  </li>
 </ul>
@@ -266,10 +287,22 @@
         
               <div>
                 
-  <div class="section" id="handling-images-in-python">
-<h1>Handling images in Python<a class="headerlink" href="#handling-images-in-python" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="basics-of-image-handling-and-processing">
+<h1>1. Basics of image handling and processing<a class="headerlink" href="#basics-of-image-handling-and-processing" title="Permalink to this headline">¶</a></h1>
 <p>In order to deploy Machine Learning approaches for images, we of course need to know how to handle images in Python. In particular complex pipelines may require some pre-processing, and we will introduce here some basic concepts.</p>
 <p>Different fields favor different image handling packages. Fields working with “natural” images favor Pillow (PIL) which is also used as a backend in PyTorch, scientific fields like microscopy favor scikit-image, and computer vision prefers OpenCV. We will therefore present here basics for several packages and you will have to choose the most appropriate once for your projects.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set path containing data folder or use default for Colab (/gdrive/My Drive)</span>
+<span class="n">local_folder</span> <span class="o">=</span> <span class="s2">&quot;../&quot;</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/guiwitz/DLImaging/master/utils/check_colab.py&#39;</span><span class="p">,</span> <span class="s1">&#39;check_colab.py&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">check_colab</span> <span class="kn">import</span> <span class="n">set_datapath</span>
+<span class="n">colab</span><span class="p">,</span> <span class="n">datapath</span> <span class="o">=</span> <span class="n">set_datapath</span><span class="p">(</span><span class="n">local_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="pillow">
 <h2>Pillow<a class="headerlink" href="#pillow" title="Permalink to this headline">¶</a></h2>
 <p>Pillow provides basic image processing capabilities in particular in the context of “natural” images like photographs. In particular it interfaces nicely with interactive computing tools like Jupyter by simply displaying image variables as images. The syntax of PIL is very object oriented and slightly unusual. Let’s import the main module of the package:</p>
@@ -284,7 +317,7 @@
 <p>Now we can open an image (standard formats like jpg or tiff are handled). The result is a PIL image object which comes with a series of methods attached. Also one can easily display it without additional coding:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;../data/woody_bulle.JPG&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;data/woody_bulle.JPG&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -296,7 +329,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01-Basics_image_processing_5_0.png" src="../_images/01-Basics_image_processing_5_0.png" />
+<img alt="../_images/01-Basics_image_processing_6_0.png" src="../_images/01-Basics_image_processing_6_0.png" />
 </div>
 </div>
 <p>However, the PIL format is also compatible with Matplotlib, so if you need more complex plots (e.g. grids or superposition with other data), you can simply use the PIL image as a Numpy array:</p>
@@ -307,10 +340,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f81cad60c10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7ff53658bd30&gt;
 </pre></div>
 </div>
-<img alt="../_images/01-Basics_image_processing_7_1.png" src="../_images/01-Basics_image_processing_7_1.png" />
+<img alt="../_images/01-Basics_image_processing_8_1.png" src="../_images/01-Basics_image_processing_8_1.png" />
 </div>
 </div>
 <div class="section" id="adjusting-size-orientation-etc">
@@ -336,15 +369,12 @@
 <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;image.rotate(30)&#39;</span><span class="p">)</span>
 <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;image.split()&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;image.split()&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;image.split()&#39;)
-</pre></div>
-</div>
-<img alt="../_images/01-Basics_image_processing_9_1.png" src="../_images/01-Basics_image_processing_9_1.png" />
+<img alt="../_images/01-Basics_image_processing_10_0.png" src="../_images/01-Basics_image_processing_10_0.png" />
 </div>
 </div>
 </div>
@@ -379,15 +409,12 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">19</span><span class="p">))</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">enhanced</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">contrasted</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">contrasted</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f811682b6a0&gt;
-</pre></div>
-</div>
-<img alt="../_images/01-Basics_image_processing_14_1.png" src="../_images/01-Basics_image_processing_14_1.png" />
+<img alt="../_images/01-Basics_image_processing_15_0.png" src="../_images/01-Basics_image_processing_15_0.png" />
 </div>
 </div>
 </div>
@@ -414,15 +441,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">19</span><span class="p">))</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_gauss</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_gauss</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f80f4cd2f40&gt;
-</pre></div>
-</div>
-<img alt="../_images/01-Basics_image_processing_18_1.png" src="../_images/01-Basics_image_processing_18_1.png" />
+<img alt="../_images/01-Basics_image_processing_19_0.png" src="../_images/01-Basics_image_processing_19_0.png" />
 </div>
 </div>
 </div>
@@ -431,7 +455,7 @@
 <p>You can easily save jpg images with:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_gauss</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;image_gauss.jpg&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_gauss</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;output/image_gauss.jpg&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -453,7 +477,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../data/woody_bulle.JPG&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;data/woody_bulle.JPG&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -475,19 +499,16 @@ shape: (2448, 3264, 3)
 <p>We see here that our RGB jpg image is just a 3D Numpy array, with each plane representing one color:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">19</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f80e80ecbb0&gt;
-</pre></div>
-</div>
-<img alt="../_images/01-Basics_image_processing_27_1.png" src="../_images/01-Basics_image_processing_27_1.png" />
+<img alt="../_images/01-Basics_image_processing_28_0.png" src="../_images/01-Basics_image_processing_28_0.png" />
 </div>
 </div>
 </div>
@@ -508,15 +529,12 @@ shape: (2448, 3264, 3)
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">)))</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;rotate&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;rotate&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;rotate&#39;)
-</pre></div>
-</div>
-<img alt="../_images/01-Basics_image_processing_30_1.png" src="../_images/01-Basics_image_processing_30_1.png" />
+<img alt="../_images/01-Basics_image_processing_31_0.png" src="../_images/01-Basics_image_processing_31_0.png" />
 </div>
 </div>
 </div>
@@ -532,15 +550,12 @@ shape: (2448, 3264, 3)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f812630ae50&gt;
-</pre></div>
-</div>
-<img alt="../_images/01-Basics_image_processing_33_1.png" src="../_images/01-Basics_image_processing_33_1.png" />
+<img alt="../_images/01-Basics_image_processing_34_0.png" src="../_images/01-Basics_image_processing_34_0.png" />
 </div>
 </div>
 <p>And many other functions are available from the <code class="docutils literal notranslate"><span class="pre">exposure</span></code> module. For example gamma correction:</p>
@@ -567,10 +582,10 @@ shape: (2448, 3264, 3)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f808ba2a3d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7ff4f65d2610&gt;
 </pre></div>
 </div>
-<img alt="../_images/01-Basics_image_processing_37_1.png" src="../_images/01-Basics_image_processing_37_1.png" />
+<img alt="../_images/01-Basics_image_processing_38_1.png" src="../_images/01-Basics_image_processing_38_1.png" />
 </div>
 </div>
 </div>
@@ -615,11 +630,11 @@ shape: (2448, 3264, 3)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-143-440bab8b68e7&gt;:3: RuntimeWarning: Images with dimensions (M, N, 3) are interpreted as 2D+RGB by default. Use `multichannel=False` to interpret as 3D image with last dimension of length 3.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-48-440bab8b68e7&gt;:3: RuntimeWarning: Images with dimensions (M, N, 3) are interpreted as 2D+RGB by default. Use `multichannel=False` to interpret as 3D image with last dimension of length 3.
   ax[0,1].imshow(skimage.filters.gaussian(image, sigma=20))
 </pre></div>
 </div>
-<img alt="../_images/01-Basics_image_processing_42_1.png" src="../_images/01-Basics_image_processing_42_1.png" />
+<img alt="../_images/01-Basics_image_processing_43_1.png" src="../_images/01-Basics_image_processing_43_1.png" />
 </div>
 </div>
 </div>
@@ -634,7 +649,7 @@ shape: (2448, 3264, 3)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-151-ccc2da966805&gt;:1: RuntimeWarning: Images with dimensions (M, N, 3) are interpreted as 2D+RGB by default. Use `multichannel=False` to interpret as 3D image with last dimension of length 3.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-49-ccc2da966805&gt;:1: RuntimeWarning: Images with dimensions (M, N, 3) are interpreted as 2D+RGB by default. Use `multichannel=False` to interpret as 3D image with last dimension of length 3.
   image_gauss2 = skimage.filters.gaussian(image, sigma=2)
 </pre></div>
 </div>
@@ -642,7 +657,7 @@ shape: (2448, 3264, 3)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s1">&#39;image_gauss2.jpg&#39;</span><span class="p">,</span> <span class="n">image_gauss2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;output/image_gauss2.jpg&#39;</span><span class="p">),</span> <span class="n">image_gauss2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -651,15 +666,6 @@ shape: (2448, 3264, 3)
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">As</span> <span class="n">image</span> <span class="n">imported</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="toctree-wrapper compound">
 </div>
 </div>
 </div>
@@ -693,6 +699,7 @@ shape: (2448, 3264, 3)
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="../Readme.html" title="previous page">Deep Learning for imaging</a>
     <a class='right-next' id="next-link" href="02-Simple_inference_vgg16.html" title="next page">2. Very accessible deep learning</a>
 
     </div>

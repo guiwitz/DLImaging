@@ -1,0 +1,1095 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Training a network &#8212; Deep Learning for imaging</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. Simplifying code with PyTorch-Lightning" href="08-Lightning.html" />
+    <link rel="prev" title="4. Simple neural net with PyTorch" href="04-Simple_NN.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep Learning for imaging</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Readme.html">
+   Deep Learning for imaging
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Basics_image_processing.html">
+   1. Basics of image handling and processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Simple_inference_vgg16.html">
+   2. Very accessible deep learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Tensors.html">
+   3. Tensor calculations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Simple_NN.html">
+   4. Simple neural net with PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. Training a network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Lightning.html">
+   8. Simplifying code with PyTorch-Lightning
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/05-Training.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/05-Training.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mini-batches">
+   Mini-batches
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-the-network">
+   Creating the network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-a-loss-function-and-and-backpropagating">
+   Defining a loss function and and backpropagating
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimizer">
+     Optimizer
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#measuring-accuracy">
+   Measuring accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-loop">
+   Training loop
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="training-a-network">
+<h1>5. Training a network<a class="headerlink" href="#training-a-network" title="Permalink to this headline">¶</a></h1>
+<p>Now that we know how to create a network, pass an input and an output, we only need to learn how to proceed for training and using it. Let’s remember the different steps needed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;illustrations/ML_principle.jpg&#39;</span><span class="p">),</span><span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Training_2_0.jpg" src="../_images/05-Training_2_0.jpg" />
+</div>
+</div>
+<ol class="simple">
+<li><p>First we will pass training examples <em>forward</em> through the network</p></li>
+<li><p>We measure an error between prediction and true label, the loss</p></li>
+<li><p>We calculate the gradient of the loss respective to each parameter in the model. This is done by <em>backpropagation</em></p></li>
+<li><p>We adjust the parameters using the calculated gradient and an optimizer (e.g. SGD)</p></li>
+</ol>
+<p>Additionally we will also see in this notebooks additional aspects such as training epochs and validation. The goal here is to once see the whole pipeline in detail before we start using tools that reduce some of the boiler-plate code necessary here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set path containing data folder or use default for Colab (/gdrive/My Drive)</span>
+<span class="n">local_folder</span> <span class="o">=</span> <span class="s2">&quot;../&quot;</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/guiwitz/DLImaging/master/utils/check_colab.py&#39;</span><span class="p">,</span> <span class="s1">&#39;check_colab.py&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">check_colab</span> <span class="kn">import</span> <span class="n">set_datapath</span>
+<span class="n">colab</span><span class="p">,</span> <span class="n">datapath</span> <span class="o">=</span> <span class="n">set_datapath</span><span class="p">(</span><span class="n">local_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mini-batches">
+<h2>Mini-batches<a class="headerlink" href="#mini-batches" title="Permalink to this headline">¶</a></h2>
+<p>Before we create our network and define a loss, let’s remember how training samples are passed through the network. In principle we want to do each optimization step for the <strong>entire dataset</strong> not just a single image as training would have a difficult time to converge. However this is usually not possible and and instead what is generally done is to use <strong>mini-batches</strong>, i.e. the network is iteratively trained on subsets of traininig examples. So now instead of using the gradients produced by a single image, one can use for example the average gradients over the mini-batch:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;illustrations/batch_processing.jpg&#39;</span><span class="p">),</span><span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Training_6_0.jpg" src="../_images/05-Training_6_0.jpg" />
+</div>
+</div>
+<p>PyTorch is in fact designed to handle batches <em>by default</em>. We can see that if we look at the documentation of modules such as <code class="docutils literal notranslate"><span class="pre">nn.Linear</span></code> which says that inputs should have the shape <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">...</span></code> where <code class="docutils literal notranslate"><span class="pre">N</span></code> stands for batch size and <code class="docutils literal notranslate"><span class="pre">...</span></code> for other dimensions such as channels, samples etc. This applies in fact to all modules, including those calculating losses. We can therefore feed examples with dimensions <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">...</span></code> and PyTorch handles batch calculations for us.</p>
+</div>
+<div class="section" id="creating-the-network">
+<h2>Creating the network<a class="headerlink" href="#creating-the-network" title="Permalink to this headline">¶</a></h2>
+<p>What does this mean for out network? We only have to make one slight modification. We used <code class="docutils literal notranslate"><span class="pre">x.view(-1)</span></code> previously to flatten 32x32 images into vectors of 1024 elements. If we now feed a batch of size Nx32x32, this would generate a long vector of size Nx1024. So we need to adjust the <code class="docutils literal notranslate"><span class="pre">view()</span></code> command and specify the size of the first dimension. In such a way only the image dimensions are flattened: <code class="docutils literal notranslate"><span class="pre">x.view(batchsize,</span> <span class="pre">-1)</span></code>. Alternatively we can use <code class="docutils literal notranslate"><span class="pre">torch.flatten(start_dim</span> <span class="pre">=</span> <span class="pre">1)</span></code> specifying from which dimension we want to start flattening:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.functional</span> <span class="kn">import</span> <span class="n">F</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mynetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">num_categories</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Mynetwork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="c1"># define e.g. layers here e.g.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">num_categories</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        
+        <span class="c1"># flatten the input</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">start_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># define the sequence of operations in the network including e.g. activations</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now we instantiate it with:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Mynetwork</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check that inputs/outputs work as expected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myinput</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+<span class="n">myinput</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([5, 32, 32])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myoutput</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">myinput</span><span class="p">)</span>
+<span class="n">myoutput</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([5, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we want to pass a single element, e.g. in the inference phase, then we still have to reshape it so that it has dimensions <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">...</span></code>. The first dimension will just have a size of 1. The simples to do that is to use <code class="docutils literal notranslate"><span class="pre">unsqueeze()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myimage</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+<span class="n">myimage</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([32, 32])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myimage</span> <span class="o">=</span> <span class="n">myimage</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">myimage</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([1, 32, 32])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">myimage</span><span class="p">)</span>
+<span class="n">output</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([1, 2])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="defining-a-loss-function-and-and-backpropagating">
+<h2>Defining a loss function and and backpropagating<a class="headerlink" href="#defining-a-loss-function-and-and-backpropagating" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we are going to classify images. Therefore we can use a standard loss function like cross-entropy which is also available in the <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">criterion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.nn.modules.loss.CrossEntropyLoss
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the loss function is also a module i.e. it is differentiable and can just be integrated in the network. Also it sticks to the same “batch-logic” as the other layers. Therefore it expects inputs whose dimensions start with <code class="docutils literal notranslate"><span class="pre">N</span></code> for bactches. What we need here is the output of the network of size <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">C</span></code> where C is the number of categories (2 in our example) and a list of target labels (“true” labels) which have of course to be turned into a tensor.</p>
+<p>We make up some data here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mysample</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="o">*</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">mylabels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We pass them through the network:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">mysample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And compare output to target with the cross-entropy module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">mylabels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> module <strong>automatically</strong> applies soft-max to the output and then calculates the loss. So we <strong>don’t need</strong> to have a soft-max layer at the end of our network.</p>
+<p>Now that we have done the forward pass, we can calculate the gradients of the loss by backpropagation. This is simply done by calling the <code class="docutils literal notranslate"><span class="pre">backward</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="optimizer">
+<h3>Optimizer<a class="headerlink" href="#optimizer" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have an estimate of the loss and gradients, we can optimize all our paramters by using some optimization algorithm. Several are available in <code class="docutils literal notranslate"><span class="pre">torch.optim</span></code>. We use here the Adam optimizer, one of the “safest” choices. As arguments we need to pass a list of parameters that need to be optimized. We can do that by recovering them from our model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
+ tensor([[-0.0274,  0.0152,  0.0056,  ..., -0.0029,  0.0126,  0.0256],
+         [-0.0014,  0.0168, -0.0170,  ..., -0.0104,  0.0176, -0.0168],
+         [-0.0101, -0.0104, -0.0165,  ...,  0.0123,  0.0062, -0.0237],
+         ...,
+         [-0.0039, -0.0304,  0.0112,  ...,  0.0303,  0.0042,  0.0226],
+         [ 0.0288, -0.0225,  0.0234,  ..., -0.0166, -0.0284,  0.0128],
+         [-0.0017,  0.0139,  0.0117,  ...,  0.0201,  0.0247, -0.0070]],
+        requires_grad=True),
+ Parameter containing:
+ tensor([-0.0122, -0.0055,  0.0247, -0.0007, -0.0065, -0.0270,  0.0085, -0.0277,
+          0.0213, -0.0139,  0.0052,  0.0030,  0.0101, -0.0065,  0.0134, -0.0265,
+          0.0262,  0.0109,  0.0175,  0.0157, -0.0265,  0.0153, -0.0070, -0.0234,
+         -0.0052,  0.0140,  0.0044, -0.0039, -0.0069, -0.0009, -0.0136,  0.0031,
+         -0.0176, -0.0272, -0.0048,  0.0108,  0.0142, -0.0071,  0.0255, -0.0142,
+          0.0133,  0.0146,  0.0105, -0.0095,  0.0312,  0.0179, -0.0124, -0.0202,
+         -0.0145, -0.0202,  0.0219,  0.0173,  0.0003, -0.0104, -0.0084,  0.0019,
+          0.0237, -0.0286, -0.0233,  0.0189, -0.0075, -0.0208,  0.0157,  0.0251,
+          0.0186, -0.0208, -0.0212, -0.0160, -0.0002,  0.0050, -0.0150, -0.0300,
+         -0.0229,  0.0181, -0.0201, -0.0059,  0.0219,  0.0017,  0.0169, -0.0077,
+          0.0246,  0.0019,  0.0069,  0.0205,  0.0061, -0.0284, -0.0061,  0.0187,
+         -0.0068,  0.0008, -0.0277,  0.0202, -0.0310,  0.0090, -0.0156,  0.0177,
+          0.0021,  0.0191,  0.0001,  0.0282], requires_grad=True),
+ Parameter containing:
+ tensor([[ 0.0267,  0.0750,  0.0953,  ..., -0.0904, -0.0922, -0.0075],
+         [-0.0766, -0.0220,  0.0731,  ...,  0.0267,  0.0688, -0.0117],
+         [-0.0624,  0.0761,  0.0822,  ..., -0.0306, -0.0644, -0.0727],
+         ...,
+         [-0.0617, -0.0690,  0.0481,  ...,  0.0294,  0.0835,  0.0196],
+         [-0.0352, -0.0223,  0.0219,  ..., -0.0466,  0.0588,  0.0782],
+         [ 0.0774, -0.0223,  0.0050,  ..., -0.0329,  0.0467, -0.0333]],
+        requires_grad=True),
+ Parameter containing:
+ tensor([ 0.0433, -0.0053, -0.0896, -0.0268, -0.0703, -0.0748,  0.0498, -0.0465,
+          0.0347, -0.0657, -0.0413,  0.0603,  0.0072,  0.0546, -0.0884,  0.0301,
+         -0.0154, -0.0987,  0.0239, -0.0314,  0.0583, -0.0311,  0.0964,  0.0480,
+          0.0812,  0.0544,  0.0852,  0.0113,  0.0606,  0.0197,  0.0312, -0.0685,
+         -0.0855,  0.0766, -0.0843,  0.0658, -0.0536, -0.0469, -0.0286,  0.0690,
+         -0.0412, -0.0941,  0.0780, -0.0778, -0.0024,  0.0194,  0.0274, -0.0527,
+          0.0926, -0.0519,  0.0521, -0.0112, -0.0570,  0.0666, -0.0593, -0.0825,
+          0.0553, -0.0321, -0.0301,  0.0968,  0.0407,  0.0072,  0.0786,  0.0811,
+          0.0628, -0.0213, -0.0216, -0.0202,  0.0808,  0.0854, -0.0871, -0.0718,
+          0.0014, -0.0600, -0.0865,  0.0456,  0.0574, -0.0526,  0.0927,  0.0913,
+         -0.0204,  0.0956, -0.0696,  0.0832,  0.0476,  0.0528,  0.0609,  0.0637,
+         -0.0105,  0.0637, -0.0810,  0.0912,  0.0299,  0.0104, -0.0448, -0.0759,
+         -0.0431, -0.0962,  0.0955, -0.0848], requires_grad=True),
+ Parameter containing:
+ tensor([[-0.0237, -0.0036, -0.0121, -0.0149,  0.0705, -0.0275, -0.0354,  0.0371,
+           0.0562,  0.0423, -0.0741, -0.0123,  0.0939,  0.0881,  0.0123,  0.0146,
+          -0.0219, -0.0150, -0.0718, -0.0773, -0.0648,  0.0419, -0.0110, -0.0402,
+           0.0995,  0.0814, -0.0108,  0.0975,  0.0728,  0.0705,  0.0592,  0.0367,
+          -0.0561,  0.0885, -0.0207, -0.0737, -0.0455,  0.0774,  0.0681, -0.0647,
+          -0.0409, -0.0831, -0.0716,  0.0322,  0.0926, -0.0974,  0.0570, -0.0895,
+           0.0909, -0.0248, -0.0242,  0.0605, -0.0649,  0.0482,  0.0576, -0.0126,
+           0.0549, -0.0550, -0.0698,  0.0273,  0.0351, -0.0989, -0.0542, -0.0136,
+           0.0761, -0.0888,  0.0950, -0.0725, -0.0412,  0.0131, -0.0144, -0.0101,
+           0.0540, -0.0626,  0.0969, -0.0252, -0.0324, -0.0106,  0.0526, -0.0456,
+          -0.0597,  0.0088,  0.0663,  0.0679, -0.0899,  0.0749,  0.0714, -0.0318,
+          -0.0104, -0.0360,  0.0931,  0.0783, -0.0427, -0.0039,  0.0039,  0.0977,
+          -0.0201, -0.0314, -0.0100,  0.0131],
+         [-0.0856,  0.0597, -0.0106, -0.0825,  0.0492,  0.0051, -0.0231, -0.0755,
+          -0.0243, -0.0747,  0.0661,  0.0442,  0.0661, -0.0651,  0.0940, -0.0476,
+           0.0975, -0.0758, -0.0720, -0.0525,  0.0145,  0.0089,  0.0841, -0.0867,
+          -0.0177, -0.0378, -0.0045, -0.0569, -0.0107, -0.0060,  0.0143,  0.0295,
+          -0.0002, -0.0039,  0.0025, -0.0047,  0.0483, -0.0307,  0.0375, -0.0809,
+          -0.0276,  0.0513,  0.0681, -0.0743, -0.0839, -0.0408,  0.0044, -0.0750,
+           0.0906, -0.0961, -0.0558, -0.0602,  0.0922, -0.0661, -0.0270, -0.0953,
+           0.0148,  0.0552,  0.0271,  0.0499,  0.0195, -0.0078, -0.0644, -0.0389,
+           0.0841, -0.0737,  0.0391, -0.0250, -0.0334,  0.0650, -0.0820, -0.0280,
+           0.0725,  0.0696, -0.0438, -0.0339, -0.0095, -0.0432,  0.0953, -0.0273,
+           0.0753,  0.0499, -0.0841, -0.0040,  0.0979, -0.0356, -0.0503,  0.0584,
+          -0.0571, -0.0389,  0.0899,  0.0181,  0.0454,  0.0182,  0.0939, -0.0418,
+          -0.0948,  0.0872,  0.0363, -0.0188]], requires_grad=True),
+ Parameter containing:
+ tensor([-0.0763, -0.0894], requires_grad=True)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have to acutally do one step of optimization using the <code class="docutils literal notranslate"><span class="pre">step</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check that some parameters have really changed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
+ tensor([[-0.0264,  0.0162,  0.0046,  ..., -0.0039,  0.0116,  0.0246],
+         [-0.0024,  0.0158, -0.0160,  ..., -0.0114,  0.0166, -0.0158],
+         [-0.0111, -0.0114, -0.0155,  ...,  0.0113,  0.0072, -0.0227],
+         ...,
+         [-0.0049, -0.0314,  0.0122,  ...,  0.0313,  0.0052,  0.0236],
+         [ 0.0298, -0.0215,  0.0224,  ..., -0.0156, -0.0274,  0.0118],
+         [-0.0007,  0.0149,  0.0107,  ...,  0.0211,  0.0257, -0.0080]],
+        requires_grad=True),
+ Parameter containing:
+ tensor([-1.1247e-02, -6.5313e-03,  2.3699e-02, -1.6781e-03, -7.4892e-03,
+         -2.7992e-02,  7.4765e-03, -2.8675e-02,  2.0316e-02, -1.2889e-02,
+          4.2284e-03,  2.0494e-03,  1.1066e-02, -5.4544e-03,  1.2351e-02,
+         -2.5544e-02,  2.6171e-02,  9.9048e-03,  1.8486e-02,  1.4749e-02,
+         -2.7507e-02,  1.6282e-02, -8.0221e-03, -2.4417e-02, -6.1554e-03,
+          1.4993e-02,  3.3583e-03, -2.8540e-03, -5.9054e-03,  9.4057e-05,
+         -1.2622e-02,  2.0653e-03, -1.6629e-02, -2.6229e-02, -4.7557e-03,
+          9.8049e-03,  1.3155e-02, -8.0741e-03,  2.4465e-02, -1.5245e-02,
+          1.4283e-02,  1.3634e-02,  1.1456e-02, -1.0463e-02,  3.0166e-02,
+          1.8856e-02, -1.1445e-02, -1.9209e-02, -1.3472e-02, -1.9212e-02,
+          2.0909e-02,  1.6326e-02, -6.8397e-04, -1.0449e-02, -9.3798e-03,
+          8.6719e-04,  2.2691e-02, -2.9628e-02, -2.2252e-02,  1.9938e-02,
+         -7.5444e-03, -1.9824e-02,  1.5661e-02,  2.4141e-02,  1.7616e-02,
+         -1.9797e-02, -2.0212e-02, -1.6023e-02,  7.6802e-04,  4.0007e-03,
+         -1.4018e-02, -3.0965e-02, -2.3869e-02,  1.9144e-02, -2.1081e-02,
+         -4.8626e-03,  2.2867e-02,  2.7318e-03,  1.5868e-02, -6.6797e-03,
+          2.5643e-02,  8.8671e-04,  7.8694e-03,  1.9546e-02,  5.0644e-03,
+         -2.7384e-02, -5.0888e-03,  1.7725e-02, -5.7514e-03, -1.6735e-04,
+         -2.8744e-02,  1.9165e-02, -3.2047e-02,  7.9849e-03, -1.4580e-02,
+          1.8748e-02,  3.0574e-03,  1.8073e-02,  1.1436e-03,  2.9155e-02],
+        requires_grad=True),
+ Parameter containing:
+ tensor([[ 0.0267,  0.0750,  0.0943,  ..., -0.0904, -0.0922, -0.0075],
+         [-0.0776, -0.0230,  0.0741,  ...,  0.0257,  0.0698, -0.0107],
+         [-0.0624,  0.0761,  0.0832,  ..., -0.0306, -0.0644, -0.0727],
+         ...,
+         [-0.0617, -0.0680,  0.0491,  ...,  0.0294,  0.0845,  0.0206],
+         [-0.0362, -0.0233,  0.0229,  ..., -0.0476,  0.0598,  0.0792],
+         [ 0.0784, -0.0213,  0.0040,  ..., -0.0319,  0.0457, -0.0343]],
+        requires_grad=True),
+ Parameter containing:
+ tensor([ 0.0423, -0.0043, -0.0886, -0.0278, -0.0713, -0.0738,  0.0508, -0.0465,
+          0.0337, -0.0667, -0.0413,  0.0613,  0.0062,  0.0536, -0.0884,  0.0291,
+         -0.0144, -0.0987,  0.0229, -0.0314,  0.0593, -0.0311,  0.0974,  0.0470,
+          0.0802,  0.0534,  0.0842,  0.0103,  0.0596,  0.0187,  0.0302, -0.0695,
+         -0.0845,  0.0756, -0.0843,  0.0668, -0.0526, -0.0479, -0.0276,  0.0680,
+         -0.0412, -0.0951,  0.0790, -0.0788, -0.0034,  0.0204,  0.0264, -0.0527,
+          0.0916, -0.0529,  0.0511, -0.0102, -0.0560,  0.0656, -0.0603, -0.0835,
+          0.0543, -0.0311, -0.0291,  0.0958,  0.0407,  0.0082,  0.0786,  0.0801,
+          0.0638, -0.0203, -0.0226, -0.0202,  0.0808,  0.0844, -0.0881, -0.0708,
+          0.0024, -0.0590, -0.0875,  0.0446,  0.0574, -0.0526,  0.0937,  0.0923,
+         -0.0194,  0.0966, -0.0706,  0.0822,  0.0486,  0.0518,  0.0599,  0.0647,
+         -0.0095,  0.0627, -0.0800,  0.0902,  0.0309,  0.0114, -0.0448, -0.0759,
+         -0.0441, -0.0952,  0.0965, -0.0858], requires_grad=True),
+ Parameter containing:
+ tensor([[-0.0247, -0.0026, -0.0131, -0.0159,  0.0695, -0.0285, -0.0364,  0.0371,
+           0.0552,  0.0413, -0.0741, -0.0133,  0.0929,  0.0871,  0.0123,  0.0136,
+          -0.0229, -0.0150, -0.0708, -0.0773, -0.0658,  0.0419, -0.0120, -0.0412,
+           0.0985,  0.0804, -0.0098,  0.0965,  0.0738,  0.0715,  0.0602,  0.0357,
+          -0.0571,  0.0875, -0.0207, -0.0727, -0.0465,  0.0784,  0.0691, -0.0657,
+          -0.0409, -0.0821, -0.0726,  0.0332,  0.0916, -0.0984,  0.0560, -0.0895,
+           0.0919, -0.0258, -0.0252,  0.0615, -0.0659,  0.0472,  0.0566, -0.0136,
+           0.0539, -0.0560, -0.0708,  0.0283,  0.0351, -0.0979, -0.0542, -0.0146,
+           0.0751, -0.0898,  0.0940, -0.0725, -0.0412,  0.0141, -0.0154, -0.0091,
+           0.0530, -0.0636,  0.0959, -0.0262, -0.0324, -0.0106,  0.0516, -0.0466,
+          -0.0587,  0.0078,  0.0653,  0.0669, -0.0909,  0.0739,  0.0704, -0.0308,
+          -0.0094, -0.0370,  0.0941,  0.0793, -0.0437, -0.0049,  0.0039,  0.0977,
+          -0.0211, -0.0324, -0.0110,  0.0121],
+         [-0.0846,  0.0587, -0.0096, -0.0815,  0.0502,  0.0061, -0.0221, -0.0755,
+          -0.0233, -0.0737,  0.0661,  0.0452,  0.0671, -0.0641,  0.0940, -0.0466,
+           0.0985, -0.0758, -0.0730, -0.0525,  0.0155,  0.0089,  0.0851, -0.0857,
+          -0.0167, -0.0368, -0.0055, -0.0559, -0.0117, -0.0070,  0.0133,  0.0305,
+           0.0008, -0.0029,  0.0025, -0.0057,  0.0493, -0.0317,  0.0365, -0.0799,
+          -0.0276,  0.0503,  0.0691, -0.0753, -0.0829, -0.0398,  0.0054, -0.0750,
+           0.0896, -0.0951, -0.0548, -0.0612,  0.0932, -0.0651, -0.0260, -0.0943,
+           0.0158,  0.0562,  0.0281,  0.0489,  0.0195, -0.0088, -0.0644, -0.0379,
+           0.0851, -0.0727,  0.0401, -0.0250, -0.0334,  0.0640, -0.0810, -0.0290,
+           0.0735,  0.0706, -0.0428, -0.0329, -0.0095, -0.0432,  0.0963, -0.0263,
+           0.0743,  0.0509, -0.0831, -0.0030,  0.0989, -0.0346, -0.0493,  0.0574,
+          -0.0581, -0.0379,  0.0889,  0.0171,  0.0464,  0.0192,  0.0939, -0.0418,
+          -0.0938,  0.0882,  0.0373, -0.0178]], requires_grad=True),
+ Parameter containing:
+ tensor([-0.0773, -0.0884], requires_grad=True)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="measuring-accuracy">
+<h2>Measuring accuracy<a class="headerlink" href="#measuring-accuracy" title="Permalink to this headline">¶</a></h2>
+<p>We use the cross-entropy as loss because it allows us to optimize our network. However what we are ultimately interested in is the <strong>accuracy</strong> of our model i.e. whether the correct label has been found or not. Such a binary answer is not useful for optimization but is what we want to monitor in the end. Let’s generate some random data and see how we can calculate this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myimages</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,(</span><span class="mi">3</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0, 1, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">myimages</span><span class="p">)</span>
+<span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.0445,  0.0200],
+        [ 0.0951, -0.0048],
+        [ 0.0114, -0.0642]], grad_fn=&lt;AddmmBackward&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The predicted category is the one with the highest probability (not normalized here but it doesn’t matter). We can therefore just look for the index of the maximum value along the horizontal dimension:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1, 0, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can compare prediction and true label:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">==</span> <span class="n">output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([False, False,  True])
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we take the sum over this tensor, it tells us how many samples in the batch were correctly predicted and the average accuracy is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(0.3333)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
+<p>Now that we know that all steps work, we want to test our network. We will create a synthetic dataset for that using <code class="docutils literal notranslate"><span class="pre">skimage.draw</span></code>. We will just generate random images with either circles or triangles. As we have an “infinite” amount of data available, we just artificially set a size for our dataset.</p>
+<p>Don’t forget that we need a training and a validation dataset. Every time we have trained the network with the whole training dataset we check prediction quality with the validation dataset to make sure e.g. we are not over-fitting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">random_shapes</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following function takes as input a keyword - <code class="docutils literal notranslate"><span class="pre">triangle</span></code>, <code class="docutils literal notranslate"><span class="pre">circle</span></code>, etc. - and outputs an image with that object as a PyTorch tensor:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_image</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">imsize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate image of given shape scaled 0-1.</span>
+<span class="sd">    shape: str</span>
+<span class="sd">        shape to draw (circle, triangle, rectangle)</span>
+<span class="sd">    imsize: int</span>
+<span class="sd">        size of image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">image</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">random_shapes</span><span class="p">((</span><span class="n">imsize</span><span class="p">,</span><span class="n">imsize</span><span class="p">),</span><span class="n">max_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span>
+                                <span class="n">min_size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="c1">#normalize</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="o">-</span><span class="n">image</span><span class="p">)</span><span class="o">/</span><span class="mi">255</span>
+
+    <span class="c1"># turn into tensor</span>
+    <span class="n">image_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">image_tensor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To create pairs of images and labels we simply create a list of possible shapes and randomly pick values from there. We should also not forget to transform the label into a tensor. Let’s make a single image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="s1">&#39;triangle&#39;</span><span class="p">,</span><span class="s1">&#39;rectangle&#39;</span><span class="p">]</span>
+<span class="n">num_cat</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">im_type</span><span class="p">)</span>
+<span class="n">image_size</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="n">label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_cat</span><span class="p">,(</span><span class="mi">1</span><span class="p">,))</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">make_image</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">label</span><span class="p">],</span> <span class="n">image_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">label</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Training_55_0.png" src="../_images/05-Training_55_0.png" />
+</div>
+</div>
+<p>We want to train our network using mini-batches, and each batch should have a size <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">H</span> <span class="pre">x</span> <span class="pre">W</span></code> where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the batch size and <code class="docutils literal notranslate"><span class="pre">H,W</span></code> the image dimension. We can create a batch by stacking multiple 2D tensors together:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">single_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">make_image</span><span class="p">(</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="n">image_size</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)])</span>
+<span class="n">single_batch</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([10, 32, 32])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Of course we want to mix the different image types, so we generate labels of size <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> as well:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_cat</span><span class="p">,(</span><span class="n">batch_size</span><span class="p">,))</span>
+<span class="n">single_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">make_image</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">image_size</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">label</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">single_batch</span><span class="p">[</span><span class="n">x</span><span class="p">,:,:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Training_59_0.png" src="../_images/05-Training_59_0.png" />
+</div>
+</div>
+<p>Finally we can create our full dataset (as a list of tensors) by generating <code class="docutils literal notranslate"><span class="pre">M</span></code> bachtes in order to have <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">x</span> <span class="pre">N</span></code> training examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># size of training dataset</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">training_size</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">validation_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">train_batch_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">training_size</span><span class="o">/</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="n">validation_batch_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">validation_size</span><span class="o">/</span><span class="n">batch_size</span><span class="p">)</span>
+
+<span class="n">training_label</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_cat</span><span class="p">,(</span><span class="n">batch_size</span><span class="p">,))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">train_batch_number</span><span class="p">)]</span>
+<span class="n">validation_label</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_cat</span><span class="p">,(</span><span class="n">batch_size</span><span class="p">,))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">validation_batch_number</span><span class="p">)]</span>
+
+<span class="n">train_batches</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">make_image</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">image_size</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lab</span><span class="p">])</span> <span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="n">training_label</span><span class="p">]</span>
+<span class="n">valid_batches</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">make_image</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">image_size</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lab</span><span class="p">])</span> <span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="n">validation_label</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="training-loop">
+<h2>Training loop<a class="headerlink" href="#training-loop" title="Permalink to this headline">¶</a></h2>
+<p>Now we can create a loop where we iterate through our batches to train our network and go through the steps defined above. We will do two loops:</p>
+<ol class="simple">
+<li><p>Over epochs: one epoch representing a training step over <strong>all batches</strong></p></li>
+<li><p>Over batches</p></li>
+</ol>
+<p>We do validation only once per epoch to see how training goes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#del model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Mynetwork</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># initialize running accuracy</span>
+    <span class="n">running_accuracy</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">train_batch_number</span><span class="p">):</span>
+    
+        <span class="c1"># get batch</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">training_label</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="n">mybatch</span> <span class="o">=</span> <span class="n">train_batches</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+
+        <span class="c1"># calculate predicted label and calculate loss</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">mybatch</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+
+        <span class="c1"># backpropagate the loss</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="c1"># do the optimization step</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># set gradients to zero as PyTorch accumulates them otherwise</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c1"># calculate accuracy</span>
+        <span class="n">mean_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">batch_size</span>
+        <span class="n">running_accuracy</span><span class="o">+=</span><span class="n">mean_accuracy</span>
+
+        <span class="n">every_nth</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="n">every_nth</span> <span class="o">==</span> <span class="n">every_nth</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;accuracy: </span><span class="si">{</span><span class="n">running_accuracy</span><span class="o">/</span><span class="n">every_nth</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">running_accuracy</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
+    <span class="c1"># validation</span>
+    <span class="n">valid_accuracy</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">validation_batch_number</span><span class="p">):</span>
+    
+        <span class="c1"># get batch</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">validation_label</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="n">mybatch</span> <span class="o">=</span> <span class="n">valid_batches</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+
+        <span class="c1"># calculate predicted label</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">mybatch</span><span class="p">)</span>
+        <span class="c1"># calculate accuracy</span>
+        <span class="n">mean_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">batch_size</span>
+        <span class="n">valid_accuracy</span> <span class="o">+=</span> <span class="n">mean_accuracy</span>
+    <span class="n">valid_accuracy</span> <span class="o">=</span> <span class="n">valid_accuracy</span><span class="o">/</span><span class="n">validation_batch_number</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;valid_accuracy: </span><span class="si">{</span><span class="n">valid_accuracy</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch: 0
+valid_accuracy: 0.7200000286102295
+epoch: 1
+valid_accuracy: 0.7599999308586121
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that accuracy improves but not to a perfect level. We can try to increase the number of epochs or the training size. We can also try to understand where the problem is. For example we can try to find out which images are most mis-classified using a confusion matrix from scikit-learn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sn</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We generate a test batch and obtain a prediction with our model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">im_type</span><span class="p">),(</span><span class="mi">100</span><span class="p">,))</span>
+<span class="n">mybatch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">make_image</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">image_size</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">label</span><span class="p">])</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">mybatch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again the maximum index for each element of the batch gives us the final class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1, 0, 1, 1, 1, 0, 1, 2, 1, 2, 0, 1, 1, 0, 1, 2, 1, 2, 2, 1, 1, 1, 0, 1,
+        2, 1, 2, 1, 2, 2, 2, 2, 0, 1, 0, 2, 2, 2, 1, 1, 1, 2, 1, 1, 0, 2, 2, 1,
+        0, 1, 2, 1, 2, 0, 0, 1, 0, 2, 1, 0, 0, 2, 0, 0, 2, 0, 0, 1, 2, 2, 2, 1,
+        1, 2, 1, 2, 1, 1, 1, 0, 2, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 0, 1, 0,
+        1, 1, 0, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0, 2, 1, 2, 1, 0, 1, 0, 1, 2, 2, 1, 0, 0, 1, 2, 1, 2, 2, 1, 1, 1, 2, 1,
+        2, 1, 2, 1, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 1, 0, 1, 0, 1, 0, 0, 2, 2, 1,
+        0, 1, 2, 0, 2, 2, 2, 1, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 1, 2, 2, 2, 1,
+        0, 0, 1, 0, 0, 2, 1, 2, 2, 0, 2, 1, 1, 1, 0, 2, 2, 2, 2, 1, 0, 0, 0, 0,
+        1, 1, 0, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s calcualte the confusion matrix and transform it into a Dataframe that we can then easily plot with seaborn:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_cm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="p">),</span> <span class="n">index</span> <span class="o">=</span> <span class="n">im_type</span><span class="p">,</span>
+                  <span class="n">columns</span> <span class="o">=</span> <span class="n">im_type</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">sn</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Training_73_0.png" src="../_images/05-Training_73_0.png" />
+</div>
+</div>
+<p>We see that the problem is mostly the circle. Because we use a tiny image, small circles are not smooth and can look like rectangles or triangles.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Re-use the network you have create for the exercise 4. Make sure it can take <strong>batches</strong> of 2D images as input.</p></li>
+<li><p>Create an image generator which creates black (value=0) images (2D tensors) with a single white (value=1) line which is vertical (class #1) or horizontal (class #2)</p></li>
+<li><p>Create training and validation data generators</p></li>
+<li><p>Add a training loop and train. Verify that the nework works</p></li>
+<li><p>“Bonus”: try to add various levels of noise to the image and see how prediction is affected</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="04-Simple_NN.html" title="previous page">4. Simple neural net with PyTorch</a>
+    <a class='right-next' id="next-link" href="08-Lightning.html" title="next page">8. Simplifying code with PyTorch-Lightning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Guillaume Witz<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

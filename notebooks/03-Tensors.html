@@ -56,6 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Simple neural net with PyTorch" href="04-Simple_NN.html" />
     <link rel="prev" title="2. Very accessible deep learning" href="02-Simple_inference_vgg16.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -86,12 +87,17 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="01-Basics_image_processing.html">
-   Handling images in Python
+  <a class="reference internal" href="../Readme.html">
+   Deep Learning for imaging
   </a>
  </li>
 </ul>
 <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Basics_image_processing.html">
+   1. Basics of image handling and processing
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02-Simple_inference_vgg16.html">
    2. Very accessible deep learning
@@ -100,6 +106,21 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    3. Tensor calculations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Simple_NN.html">
+   4. Simple neural net with PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Training.html">
+   5. Training a network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Lightning.html">
+   8. Simplifying code with PyTorch-Lightning
   </a>
  </li>
 </ul>
@@ -207,6 +228,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sending-tensors-to-a-gpu">
    Sending tensors to a GPU
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
 </ul>
@@ -706,6 +732,44 @@ n_array dtype: float64
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see here that we have again difficulties getting the tensor “out” of PyTorch. This time not because it’s part of a gradient but because it lives on the GPU. So we need to first copy it back to the CPU first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor_CPU</span> <span class="o">=</span> <span class="n">mytensor</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor_CPU</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You will regularly hit this kind of problems when writing your code, so remember these two potential issues when you want to <em>post-process</em> some tensor:</p>
+<ul class="simple">
+<li><p>you migth need to <em>detach</em> it from the gradient calculation</p></li>
+<li><p>you migth need to pull it out of the GPU</p></li>
+<li><p>for NN computation, you might need to push your data (tensors) to the GPU</p></li>
+</ul>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Create a tensor of integers in the range 0-100 of size 16x16</p></li>
+<li><p>Change its “gradient-status” by attaching it to gradient calculation</p></li>
+<li><p>Solve the problem appearing in (2.) by creating a float32 tensor and attaching the gradient again</p></li>
+<li><p>Flatten the array to 1d</p></li>
+<li><p>Transform your flat tensor to a numpy array</p></li>
+</ol>
 </div>
 </div>
 
@@ -738,6 +802,7 @@ n_array dtype: float64
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="02-Simple_inference_vgg16.html" title="previous page">2. Very accessible deep learning</a>
+    <a class='right-next' id="next-link" href="04-Simple_NN.html" title="next page">4. Simple neural net with PyTorch</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

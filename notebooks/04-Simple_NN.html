@@ -1,0 +1,1252 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. Simple neural net with PyTorch &#8212; Deep Learning for imaging</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Training a network" href="05-Training.html" />
+    <link rel="prev" title="3. Tensor calculations" href="03-Tensors.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep Learning for imaging</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Readme.html">
+   Deep Learning for imaging
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Basics_image_processing.html">
+   1. Basics of image handling and processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Simple_inference_vgg16.html">
+   2. Very accessible deep learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Tensors.html">
+   3. Tensor calculations
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Simple neural net with PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Training.html">
+   5. Training a network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Lightning.html">
+   8. Simplifying code with PyTorch-Lightning
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/04-Simple_NN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/04-Simple_NN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#layer-from-torch-nn">
+   Layer from torch.nn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#passing-an-input">
+   Passing an input
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#activation">
+   Activation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure-of-a-network">
+   Structure of a network
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batches">
+     Batches
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#passing-an-image-as-input">
+     Passing an image as input
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#saving-and-loading-a-model">
+   Saving and loading a model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#save-full-model">
+     Save full model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-the-model-state">
+     Saving the model state
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-on-a-gpu-run-on-colab">
+   Running on a GPU (run on Colab)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="simple-neural-net-with-pytorch">
+<h1>4. Simple neural net with PyTorch<a class="headerlink" href="#simple-neural-net-with-pytorch" title="Permalink to this headline">¶</a></h1>
+<p>Neural networks can be programmed on different levels depending on how much one needs to customize either the architecture or the training pattern. When dealing with more complex NN we will use a higher-level package (Lightning, see <a class="reference internal" href="08-Lightning.html"><span class="doc std std-doc">Chapter 8</span></a>) which will spare us some “manual” work. However, in order to understand all steps involved in designing a DL algorithm, we will first use basic PyTroch. In this notebook we will see howe we can <em>design</em> a NN while in <a class="reference internal" href="05-Training.html"><span class="doc std std-doc">the next notebook</span></a> we will se how to train it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set path containing data folder or use default for Colab (/gdrive/My Drive)</span>
+<span class="n">local_folder</span> <span class="o">=</span> <span class="s2">&quot;../&quot;</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/guiwitz/DLImaging/master/utils/check_colab.py&#39;</span><span class="p">,</span> <span class="s1">&#39;check_colab.py&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">check_colab</span> <span class="kn">import</span> <span class="n">set_datapath</span>
+<span class="n">colab</span><span class="p">,</span> <span class="n">datapath</span> <span class="o">=</span> <span class="n">set_datapath</span><span class="p">(</span><span class="n">local_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="layer-from-torch-nn">
+<h2>Layer from torch.nn<a class="headerlink" href="#layer-from-torch-nn" title="Permalink to this headline">¶</a></h2>
+<p>We will see in this notebook how to create a simple neural network for image classification using the most general mechanism in PyTorch which are modules. All module-related objects and functions are contained in <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code>. As the name indicates, these modules are really <em>modular</em> in the sense that they are indpendent parts of networks that can be combined together. Mostly we will use single modules containing the multiple layers of our architecture, but we will also see examples where multiple modules are assembled.</p>
+<p>A module is essentially an assemble of multiple other modules, and many of these are provided “pre-made” for us also available in <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code>. For example in the simple network used here we will only use linear layers. Before we create an actual network let’s see how layers work:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We creat now a linear layer that takes a vector of size 5 as input and ouptuts a vector of size 10:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lin_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This single layer already has parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">lin_layer</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
+ tensor([[ 0.4421, -0.1145, -0.4361, -0.0684,  0.0085],
+         [ 0.1959, -0.1710, -0.2257,  0.1895,  0.0327],
+         [ 0.1115,  0.2765,  0.2694,  0.0975,  0.0592],
+         [ 0.2784,  0.0342, -0.3286,  0.4176,  0.2712],
+         [-0.1680,  0.0573,  0.2052, -0.2391, -0.3771],
+         [-0.0290,  0.0254,  0.2975, -0.3394,  0.0952],
+         [-0.1575,  0.0856,  0.2010,  0.4332,  0.3322],
+         [ 0.2593, -0.1623,  0.1678, -0.2371,  0.4208],
+         [-0.0882, -0.4169,  0.1692,  0.0767,  0.3568],
+         [-0.3912, -0.4307,  0.3695, -0.0700, -0.2484]], requires_grad=True),
+ Parameter containing:
+ tensor([ 0.4386, -0.2198,  0.2719,  0.4018,  0.1458, -0.1378, -0.0716,  0.0652,
+         -0.0754,  0.2645], requires_grad=True)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that we have indeed a 5x10 matrix plus the bias term of size 10. When we later assemble multiple modules, we will see the same time of output but with many more parameters.</p>
+</div>
+<div class="section" id="passing-an-input">
+<h2>Passing an input<a class="headerlink" href="#passing-an-input" title="Permalink to this headline">¶</a></h2>
+<p>Our layer takes a vector as an input so let’s try to creat a vector of size 5 and pass it through the layer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myvector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">myvector</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 6, 80, 33, 40, 87])
+</pre></div>
+</div>
+</div>
+</div>
+<p>No we we pass it to <code class="docutils literal notranslate"><span class="pre">lin_layer</span></code>:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lin_layer</span><span class="p">(</span><span class="n">myvector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">19</span><span class="o">-</span><span class="mi">6</span><span class="n">ef7c06b0ae8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lin_layer</span><span class="p">(</span><span class="n">myvector</span><span class="p">)</span>
+
+<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">725</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slow_forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">726</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">727</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span>         <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>                 <span class="n">_global_forward_hooks</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+
+<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/linear.py</span> in <span class="ni">forward</span><span class="nt">(self, input)</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span> 
+<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">93</span>         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> 
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/functional.py</span> in <span class="ni">linear</span><span class="nt">(input, weight, bias)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1686</span>         <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Tensor</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tens_ops</span><span class="p">])</span> <span class="ow">and</span> <span class="n">has_torch_function</span><span class="p">(</span><span class="n">tens_ops</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1687</span>             <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">tens_ops</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1688</span>     <span class="k">if</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1689</span>         <span class="c1"># fused op is marginally faster</span>
+<span class="g g-Whitespace">   </span><span class="mi">1690</span>         <span class="n">ret</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">addmm</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="o">.</span><span class="n">t</span><span class="p">())</span>
+
+<span class="ne">AttributeError</span>: &#39;numpy.ndarray&#39; object has no attribute &#39;dim&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Of course we get an error, as the layer doesn’t expect a Numpy array but a PyTorch tensor! We can have a look at what PyTorch tensors are in the <a class="reference internal" href="03-Tensors.html"><span class="doc std std-doc">03-Tensors</span></a> notebook and come back here later.</p>
+<p>Now we can turn our Numpy array into a tensor:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">myvector</span><span class="p">)</span>
+<span class="n">mytensor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 6, 80, 33, 40, 87])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lin_layer</span><span class="p">(</span><span class="n">mytensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">23</span><span class="o">-</span><span class="mi">4</span><span class="n">eeffe384bb6</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lin_layer</span><span class="p">(</span><span class="n">mytensor</span><span class="p">)</span>
+
+<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">725</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slow_forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">726</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">727</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span>         <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>                 <span class="n">_global_forward_hooks</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+
+<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/linear.py</span> in <span class="ni">forward</span><span class="nt">(self, input)</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span> 
+<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">93</span>         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> 
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/functional.py</span> in <span class="ni">linear</span><span class="nt">(input, weight, bias)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1690</span>         <span class="n">ret</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">addmm</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="o">.</span><span class="n">t</span><span class="p">())</span>
+<span class="g g-Whitespace">   </span><span class="mi">1691</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1692</span>         <span class="n">output</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">weight</span><span class="o">.</span><span class="n">t</span><span class="p">())</span>
+<span class="g g-Whitespace">   </span><span class="mi">1693</span>         <span class="k">if</span> <span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1694</span>             <span class="n">output</span> <span class="o">+=</span> <span class="n">bias</span>
+
+<span class="ne">RuntimeError</span>: expected scalar type Long but found Float
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again an error! The error can be a bit misleading. The whole problem is that the weights in the layer are defined by default as <code class="docutils literal notranslate"><span class="pre">float32</span></code>. Hence the input should match this but we passed an 64 bits integer which creates a conflict. Let’s adjust the type of our tensor. We can either modify the tensor:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor_float</span> <span class="o">=</span> <span class="n">mytensor</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor_float</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 6., 80., 33., 40., 87.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor_float</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.float32
+</pre></div>
+</div>
+</div>
+</div>
+<p>or do it from the beginning when transforming our Numpy array by specifying the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> explicitely:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor_float</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">myvector</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mytensor_float</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.float32
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we finally have the right object to path through our network:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">lin_layer</span><span class="p">(</span><span class="n">mytensor_float</span><span class="p">)</span>
+<span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([-22.4567,  -9.7505,  41.0016,  34.2633, -31.8848,   6.2413,  58.6879,
+         21.3043,   5.7423, -48.7560], grad_fn=&lt;AddBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([10])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the ouput has as expected as size of 10! Of course we can now add as many other layers as we want:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lin_layer2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">lin_layer2</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([3])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="activation">
+<h2>Activation<a class="headerlink" href="#activation" title="Permalink to this headline">¶</a></h2>
+<p>In addition to <em>layers</em> we will typically also need activation functions such as soft-max. Those are implemented as modules in <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> as well as functions in <code class="docutils literal notranslate"><span class="pre">torch.functional</span></code> which we use here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we use the functional form, we can pass the output of the above linear layer directly to the activation function, here a ReLU:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lin_layer_activated</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lin_layer_activated</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([11.7903,  5.3025,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="structure-of-a-network">
+<h2>Structure of a network<a class="headerlink" href="#structure-of-a-network" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have seen how to create a layers and activation functions we can assemble them into a usable network structure. In PyTorch that structure is <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> a base class on top of which we can build our network. We can specify what parameters we want to pass when creating this object and we also have to define a single function, <code class="docutils literal notranslate"><span class="pre">forward</span></code>, which describes the network itself. Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mynetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">myparameter1</span><span class="p">,</span> <span class="n">myparameter2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Mynetwork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="c1"># define e.g. layers here e.g.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">myparameter1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">myparameter2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        
+        <span class="c1"># define the sequence of operations in the network including e.g. activations</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Above, we have defined a simple network that is defined by two parameters, <code class="docutils literal notranslate"><span class="pre">myparameter1,</span> <span class="pre">myparameter2</span></code>, and which is composed of two linear layers and ReLU unit. The differnt layers that we need are defined in <code class="docutils literal notranslate"><span class="pre">__init__</span></code> as object parameters and then re-used in the network definition in the <code class="docutils literal notranslate"><span class="pre">forward</span></code> function. <code class="docutils literal notranslate"><span class="pre">forward</span></code> takes an input <code class="docutils literal notranslate"><span class="pre">x</span></code> (e.g. an image to classify), passes it through the network and outputs the result. Therefore in principle we could instantiate a model and use it like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mymodel</span> <span class="o">=</span> <span class="n">Mynetwork</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mymodel</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">myinput</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> has a <code class="docutils literal notranslate"><span class="pre">__call__</span></code> attribute that allows us to use the class as a function like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mymodel</span> <span class="o">=</span> <span class="n">Mynetwork</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mymodel</span><span class="p">(</span><span class="n">myinput</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is actually <strong>how a module should be properly used</strong> in order to exploit all capabilities offered in PyTorch.</p>
+<p>Let’s now try this out. We instantiate the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mymodel</span> <span class="o">=</span> <span class="n">Mynetwork</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just like for the single linear layer before, we can have a look at all parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">mymodel</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
+ tensor([[ 0.1047,  0.1044,  0.2613, -0.2716, -0.2679,  0.2477, -0.0682,  0.1435,
+           0.2639],
+         [-0.2840,  0.2408, -0.2044, -0.0142,  0.1154,  0.2990, -0.0983,  0.2305,
+          -0.0123],
+         [-0.2136, -0.0986,  0.2338,  0.2958, -0.2440,  0.1098, -0.0837,  0.2535,
+           0.0052],
+         [-0.0964, -0.2258, -0.2928, -0.1824, -0.1456,  0.0328, -0.0191,  0.2514,
+          -0.0937],
+         [-0.2101,  0.2728, -0.2787, -0.3247,  0.2695,  0.0866,  0.2358, -0.0314,
+          -0.0129]], requires_grad=True),
+ Parameter containing:
+ tensor([ 0.2137, -0.1018, -0.1647, -0.2172, -0.0974], requires_grad=True),
+ Parameter containing:
+ tensor([[-0.3101, -0.3519, -0.3142, -0.0934,  0.2302],
+         [ 0.2077,  0.2597, -0.3896,  0.0817,  0.4261],
+         [-0.2732,  0.4320, -0.0196,  0.3636,  0.3174]], requires_grad=True),
+ Parameter containing:
+ tensor([ 0.0113, -0.0240,  0.3221], requires_grad=True)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output is the same, only now we see all parameters from all layers, not just a single one. We can also look at the modules contained in our network:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">mymodel</span><span class="o">.</span><span class="n">modules</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Mynetwork(
+   (layer1): Linear(in_features=9, out_features=5, bias=True)
+   (layer2): Linear(in_features=5, out_features=3, bias=True)
+ ),
+ Linear(in_features=9, out_features=5, bias=True),
+ Linear(in_features=5, out_features=3, bias=True)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see some repeats because we see here modules at all levels. E.g. each linear layer is a module but our entire network is a module as well.</p>
+<p>We can also just find all modules contained in our main module and recover its name and function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">mymodel</span><span class="o">.</span><span class="n">named_children</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;name: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> module: </span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name: layer1 module: Linear(in_features=9, out_features=5, bias=True)
+name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also obtain a dictionary of all layers with their weights:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mymodel</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;layer1.weight&#39;,
+              tensor([[ 0.1047,  0.1044,  0.2613, -0.2716, -0.2679,  0.2477, -0.0682,  0.1435,
+                        0.2639],
+                      [-0.2840,  0.2408, -0.2044, -0.0142,  0.1154,  0.2990, -0.0983,  0.2305,
+                       -0.0123],
+                      [-0.2136, -0.0986,  0.2338,  0.2958, -0.2440,  0.1098, -0.0837,  0.2535,
+                        0.0052],
+                      [-0.0964, -0.2258, -0.2928, -0.1824, -0.1456,  0.0328, -0.0191,  0.2514,
+                       -0.0937],
+                      [-0.2101,  0.2728, -0.2787, -0.3247,  0.2695,  0.0866,  0.2358, -0.0314,
+                       -0.0129]])),
+             (&#39;layer1.bias&#39;,
+              tensor([ 0.2137, -0.1018, -0.1647, -0.2172, -0.0974])),
+             (&#39;layer2.weight&#39;,
+              tensor([[-0.3101, -0.3519, -0.3142, -0.0934,  0.2302],
+                      [ 0.2077,  0.2597, -0.3896,  0.0817,  0.4261],
+                      [-0.2732,  0.4320, -0.0196,  0.3636,  0.3174]])),
+             (&#39;layer2.bias&#39;, tensor([ 0.0113, -0.0240,  0.3221]))])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally we can pass an input through our network. It takes an input of size 9:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">9</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">mymodel</span><span class="p">(</span><span class="n">my_input</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([-0.3026,  0.0631,  0.1009], grad_fn=&lt;AddBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="batches">
+<h3>Batches<a class="headerlink" href="#batches" title="Permalink to this headline">¶</a></h3>
+<p>If we want to use batch processing, we can also pass batches of vectors thourgh the network instead of single vectors. PyTroch layers are designed to hanle this by default, so here for example if we want to use a batch of size 32 we can just use a 32 x 8 tensor. We create one directly with <code class="docutils literal notranslate"><span class="pre">torch.randn</span></code>here (we will learn more about batches in the chapter on training):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">batch_tensor</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([32, 9])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_output</span> <span class="o">=</span> <span class="n">mymodel</span><span class="p">(</span><span class="n">batch_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_output</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([32, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the output is “batched” as well, so the network gracefully handlend this batch for us.</p>
+</div>
+<div class="section" id="passing-an-image-as-input">
+<h3>Passing an image as input<a class="headerlink" href="#passing-an-image-as-input" title="Permalink to this headline">¶</a></h3>
+<p>For the tests above, we simply used vectors. However our goal is to pass images to our network. As our network is linear and fully connected, we therefore need to pass a flattened (1D) version of our image. We have seen before that we can do that using the <code class="docutils literal notranslate"><span class="pre">view</span></code> method or <code class="docutils literal notranslate"><span class="pre">flatten</span></code>.</p>
+<p>To test this, we first create a test image using the <code class="docutils literal notranslate"><span class="pre">skimage.draw</span></code> utility scikit-image which allows us to create <code class="docutils literal notranslate"><span class="pre">random_shapes</span></code> images:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">random_shapes</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We create a 32x32 image of a circle. We have multiple options for the number of shapes, their size etc. to select from. We also invert the image (to have the <em>object</em> as foreground):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_circle</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">random_shapes</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span><span class="n">max_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span>
+                                <span class="n">min_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">image_circle</span> <span class="o">=</span> <span class="mi">255</span><span class="o">-</span><span class="n">image_circle</span>
+
+<span class="n">image_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">image_circle</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04-Simple_NN_61_0.png" src="../_images/04-Simple_NN_61_0.png" />
+</div>
+</div>
+<p>Now we flatten the image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_flat</span> <span class="o">=</span> <span class="n">image_tensor</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">image_flat</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([1024])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We adjust our network input size:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mymodel</span> <span class="o">=</span> <span class="n">Mynetwork</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">mymodel</span><span class="p">(</span><span class="n">image_flat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 10.0429,   6.3756, -16.4639,   4.8029,   6.5702,   4.0158,   2.9788,
+          7.9026,  15.9438,  -5.9477,   0.5380,   6.8684,  12.9330, -13.7665,
+         -9.3215, -16.7994,  -5.6294, -12.9883, -13.6841,   5.4153],
+       grad_fn=&lt;AddBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The operation of “flattening” can be done at different places. For example, instead of flattening the input, we can also flatten within our network definition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mynetwork2</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">myparameter1</span><span class="p">,</span> <span class="n">myparameter2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Mynetwork2</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="c1"># define e.g. layers here e.g.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">myparameter1</span><span class="p">,</span> <span class="n">myparameter2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># define the sequence of operations in the network including e.g. activations</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">second_model</span> <span class="o">=</span> <span class="n">Mynetwork2</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">second_model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span>
+<span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([29.8248, 17.1621, 12.0101, 49.9643, 18.4871,  0.0000,  0.0000,  9.6019,
+        21.4851,  0.0000, 33.0883,  0.0000,  0.0000,  0.0000,  8.0017,  0.8017,
+        21.0188,  0.0000,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([20])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="saving-and-loading-a-model">
+<h2>Saving and loading a model<a class="headerlink" href="#saving-and-loading-a-model" title="Permalink to this headline">¶</a></h2>
+<p>Our next goal will be to train our network (see next chapter). At some point during or after training we will want to save both our model and its weights. This can be done in two ways.</p>
+<div class="section" id="save-full-model">
+<h3>Save full model<a class="headerlink" href="#save-full-model" title="Permalink to this headline">¶</a></h3>
+<p>First, we can save the entire model so that it can be simply reloaded. This is practical when developing but can lead to problems when moving saved models between computers. First we save our model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">second_model</span><span class="p">,</span> <span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;models/simpleNN.pt&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And reload it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">third_model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;models/simpleNN.pt&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">third_model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
+         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
+        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we see that we obtain the same values as above, meaning that the parameters were indeed saved.</p>
+</div>
+<div class="section" id="saving-the-model-state">
+<h3>Saving the model state<a class="headerlink" href="#saving-the-model-state" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively we can simply save all the parameters, which is a safer method. We simply recover them using <code class="docutils literal notranslate"><span class="pre">state_dict</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">third_model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;models/simpleNN_state.pt&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To reload the parameters we of course now have to first instantiate the model and “fill” it with those values using <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourth_model</span> <span class="o">=</span> <span class="n">Mynetwork2</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;models/simpleNN_state.pt&#39;</span><span class="p">))</span>
+<span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;layer1.weight&#39;,
+              tensor([[ 0.0006,  0.0285, -0.0012,  ..., -0.0120, -0.0017,  0.0108],
+                      [-0.0153, -0.0075, -0.0311,  ..., -0.0122, -0.0052, -0.0173],
+                      [ 0.0219,  0.0307,  0.0298,  ..., -0.0292, -0.0145, -0.0102],
+                      ...,
+                      [ 0.0202, -0.0083, -0.0123,  ..., -0.0279,  0.0008, -0.0194],
+                      [-0.0104, -0.0002,  0.0236,  ...,  0.0193, -0.0260,  0.0115],
+                      [-0.0140,  0.0290,  0.0227,  ..., -0.0297,  0.0002, -0.0003]])),
+             (&#39;layer1.bias&#39;,
+              tensor([-0.0247, -0.0022, -0.0153,  0.0309, -0.0280, -0.0003, -0.0287,  0.0284,
+                      -0.0312,  0.0260, -0.0283, -0.0141, -0.0034, -0.0200, -0.0104, -0.0007,
+                       0.0278,  0.0278, -0.0049,  0.0208]))])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourth_model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;All keys matched successfully&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourth_model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
+         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
+        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-on-a-gpu-run-on-colab">
+<h2>Running on a GPU (run on Colab)<a class="headerlink" href="#running-on-a-gpu-run-on-colab" title="Permalink to this headline">¶</a></h2>
+<p>If you want to exploit the computational power of a GPU you have to take care of moving <strong>both</strong> the model and the data to it. First, find out if you have a GPU. You can test this for example by running this notebook on Colab:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you have a GPU, you can define it as a device. If not you can fall back on CPU:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">dev</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">dev</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now finally if you want to use it with a model you need to move the model to it. Let’s check where it currently sits:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">second_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mynetwork2(
+  (layer1): Linear(in_features=1024, out_features=20, bias=True)
+)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">second_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
+ tensor([[ 0.0006,  0.0285, -0.0012,  ..., -0.0120, -0.0017,  0.0108],
+         [-0.0153, -0.0075, -0.0311,  ..., -0.0122, -0.0052, -0.0173],
+         [ 0.0219,  0.0307,  0.0298,  ..., -0.0292, -0.0145, -0.0102],
+         ...,
+         [ 0.0202, -0.0083, -0.0123,  ..., -0.0279,  0.0008, -0.0194],
+         [-0.0104, -0.0002,  0.0236,  ...,  0.0193, -0.0260,  0.0115],
+         [-0.0140,  0.0290,  0.0227,  ..., -0.0297,  0.0002, -0.0003]],
+        requires_grad=True),
+ Parameter containing:
+ tensor([-0.0247, -0.0022, -0.0153,  0.0309, -0.0280, -0.0003, -0.0287,  0.0284,
+         -0.0312,  0.0260, -0.0283, -0.0141, -0.0034, -0.0200, -0.0104, -0.0007,
+          0.0278,  0.0278, -0.0049,  0.0208], requires_grad=True)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now if we try to pass our current image through the network we get an error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">second_model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
+         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
+        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The error message is quite explicit: you then need also to move the data, both for training and inference to the GPU:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_tensor</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 0., 0.,  ..., 0., 0., 0.],
+        [0., 0., 0.,  ..., 0., 0., 0.],
+        [0., 0., 0.,  ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0.,  ..., 0., 0., 0.],
+        [0., 0., 0.,  ..., 0., 0., 0.],
+        [0., 0., 0.,  ..., 0., 0., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_tensor</span> <span class="o">=</span> <span class="n">image_tensor</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">second_model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
+         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
+        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output sits on the GPU and is part of the gradient calcualtion, so if you want to further use it, you will have to pull it from the GPU <strong>and</strong> detach it from gradient calculation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([58.991543,  0.      ,  0.      ,  0.      ,  0.      , 30.083395,
+        0.      , 30.660238,  0.      ,  0.      ,  0.      ,  0.      ,
+       27.177948,  0.      , 44.726513,  0.      , 13.092113, 47.96598 ,
+        0.      ,  0.      ], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Create a network with 4 successive linear layers of size 20,40 and 100 and 2, and ReLU activation after the three first layers. It takes a 2D input.</p></li>
+<li><p>With <code class="docutils literal notranslate"><span class="pre">skimage.io</span></code> import the image in <code class="docutils literal notranslate"><span class="pre">.../data/woody_baille.JPG</span></code></p></li>
+<li><p>Instantiate your model with the appropriate size</p></li>
+<li><p>Run the image through the network and turn the output into a numpy array</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="03-Tensors.html" title="previous page">3. Tensor calculations</a>
+    <a class='right-next' id="next-link" href="05-Training.html" title="next page">5. Training a network</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Guillaume Witz<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
