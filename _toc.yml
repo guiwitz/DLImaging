@@ -7,6 +7,10 @@
 - file: notebooks/06-Data_handling
 - file: notebooks/07-Augmentation
 - file: notebooks/08-Lightning
-#- file: 09-Convolutions
-#- file: 10-Segmentation
-#- file: 11-Unet
+- file: notebooks/09-Classify_drawings
+- file: notebooks/10-Convolutions_draw
+- file: notebooks/11-Autoencoder_drawings
+- file: notebooks/12-TransferLearning_worms
+- file: notebooks/13-Segmentation
+- file: notebooks/14-Unet
+- file: notebooks/15-Unet_nuclei
