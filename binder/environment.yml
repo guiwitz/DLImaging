@@ -1,7 +1,6 @@
 name: CASImaging
 channels:
   - pytorch
-  - plotly
   - conda-forge
 dependencies:
   - python=3.8
@@ -19,11 +18,10 @@ dependencies:
   - ipywidgets
   - seaborn
   - scikit-learn
-  - plotly=4.14.1
-  - plotly-orca
   - captum
   - nodejs
   - pip:
+    - albumentations
     - tqdm
     - opencv-python
     - psutil
