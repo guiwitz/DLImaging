@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4. Simple neural net with PyTorch &#8212; Deep Learning for imaging</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -131,6 +131,66 @@
  <li class="toctree-l1">
   <a class="reference internal" href="08-Lightning.html">
    8. Simplifying code with PyTorch-Lightning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Classify_drawings.html">
+   9. Classification: practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Convolutions_draw.html">
+   10. Convolutions and rescaling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Autoencoder_drawings.html">
+   11. Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Autoencoder_drawings.html#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Autoencoder_drawings.html#linear-auto-encoder">
+   Linear auto-encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Autoencoder_drawings.html#convolutional-auto-encoder">
+   Convolutional auto-encoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Autoencoder_drawings.html#how-does-the-latent-space-look">
+   How does the latent space look ?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Autoencoder_drawings.html#denoising">
+   Denoising
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-TransferLearning_worms.html">
+   12. Transfer learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Segmentation.html">
+   13. Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Unet.html">
+   14. U-net
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Unet_nuclei.html">
+   15. Unet applied to nuclei segmentation
   </a>
  </li>
 </ul>
@@ -293,7 +353,7 @@
   <div class="section" id="simple-neural-net-with-pytorch">
 <h1>4. Simple neural net with PyTorch<a class="headerlink" href="#simple-neural-net-with-pytorch" title="Permalink to this headline">¶</a></h1>
 <p>Neural networks can be programmed on different levels depending on how much one needs to customize either the architecture or the training pattern. When dealing with more complex NN we will use a higher-level package (Lightning, see <a class="reference internal" href="08-Lightning.html"><span class="doc std std-doc">Chapter 8</span></a>) which will spare us some “manual” work. However, in order to understand all steps involved in designing a DL algorithm, we will first use basic PyTroch. In this notebook we will see howe we can <em>design</em> a NN while in <a class="reference internal" href="05-Training.html"><span class="doc std std-doc">the next notebook</span></a> we will se how to train it.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set path containing data folder or use default for Colab (/gdrive/My Drive)</span>
 <span class="n">local_folder</span> <span class="o">=</span> <span class="s2">&quot;../&quot;</span>
@@ -1254,7 +1314,7 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
     </div>
 
     
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
