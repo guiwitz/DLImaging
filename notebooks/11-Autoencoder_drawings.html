@@ -149,31 +149,6 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#dataset">
-   Dataset
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#linear-auto-encoder">
-   Linear auto-encoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#convolutional-auto-encoder">
-   Convolutional auto-encoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#how-does-the-latent-space-look">
-   How does the latent space look ?
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#denoising">
-   Denoising
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="12-TransferLearning_worms.html">
    12. Transfer learning
   </a>
@@ -280,32 +255,27 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   11. Autoencoder
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dataset">
    Dataset
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-auto-encoder">
    Linear auto-encoder
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#convolutional-auto-encoder">
    Convolutional auto-encoder
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-does-the-latent-space-look">
    How does the latent space look ?
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#denoising">
    Denoising
   </a>
@@ -353,9 +323,8 @@
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="dataset">
-<h1>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h1>
+<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
 <p>In this chapter, we use again our quickdraw dataset. Le’t create again our standard dataloader:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -397,7 +366,7 @@
 </div>
 </div>
 <div class="section" id="linear-auto-encoder">
-<h1>Linear auto-encoder<a class="headerlink" href="#linear-auto-encoder" title="Permalink to this headline">¶</a></h1>
+<h2>Linear auto-encoder<a class="headerlink" href="#linear-auto-encoder" title="Permalink to this headline">¶</a></h2>
 <p>First we adapt some one of the first networks we used and turn our linear classifier into a linear auto-encoder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -563,7 +532,7 @@ TPU available: None, using: 0 TPU cores
 </div>
 </div>
 <div class="section" id="convolutional-auto-encoder">
-<h1>Convolutional auto-encoder<a class="headerlink" href="#convolutional-auto-encoder" title="Permalink to this headline">¶</a></h1>
+<h2>Convolutional auto-encoder<a class="headerlink" href="#convolutional-auto-encoder" title="Permalink to this headline">¶</a></h2>
 <p>Convolutions are of course much better at recovering spatial information and make for much better autoencoders. We use here a simple architecture that will server later as basis for a segmentation network. It is composed of a series of:</p>
 <ul class="simple">
 <li><p>encoder: convolutions and max-pooling</p></li>
@@ -793,7 +762,7 @@ TPU available: None, using: 0 TPU cores
 </div>
 </div>
 <div class="section" id="how-does-the-latent-space-look">
-<h1>How does the latent space look ?<a class="headerlink" href="#how-does-the-latent-space-look" title="Permalink to this headline">¶</a></h1>
+<h2>How does the latent space look ?<a class="headerlink" href="#how-does-the-latent-space-look" title="Permalink to this headline">¶</a></h2>
 <p>Our network compresses the image information into a N-dimensional vector. In an extreme case we can just use a space of size 2. Then our images can be represented as points in a 2D graph, allowing us to better understand what is happending. Let’s train again our network:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -905,7 +874,7 @@ TPU available: None, using: 0 TPU cores
 <p>If we choose coordinates clearly belonging to one category we obtain images with the right shapes. In mixed regions or in non-defined regions the results are more random. We will see later that we can improve this generation of image by creating a <strong>variational auto-encoder</strong>.</p>
 </div>
 <div class="section" id="denoising">
-<h1>Denoising<a class="headerlink" href="#denoising" title="Permalink to this headline">¶</a></h1>
+<h2>Denoising<a class="headerlink" href="#denoising" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a network that can re-create an image after having compressed it, we could use it for denoising. Indeed if an image contains pixels outside of the expected range, those should disappear in the encoding stage so that the reconstructed image is cleaned-up.</p>
 <p>Above we trained the network to reproduce the image that has passed through the network. Here we pass a <em>corrupted</em> image through the network but train it to match the <em>uncorrupted</em> version. Here we do this by artifically adding random noise to the image during training. Of course in real situation one would need to acquire images e.g. in good and bad conditions (imagine low vs. high illumination) and use those pairs for training. This is the approach used for example in the <a class="reference external" href="https://www.nature.com/articles/s41592-018-0216-7">CARE</a> software used to restore microscopy images.</p>
 <p>We copy here our network and add noise in the training phase:</p>
@@ -1074,6 +1043,7 @@ TPU available: None, using: 0 TPU cores
   })();
 </script>
 </div></div>
+</div>
 </div>
 </div>
 
