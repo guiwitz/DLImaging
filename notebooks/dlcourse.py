@@ -13,8 +13,10 @@ def make_image(shape, imsize=32):
         size of image
     """
     
-    image, _ = random_shapes((imsize,imsize),max_shapes=1, min_shapes=1, multichannel=False, shape=shape,
-                                min_size=8)
+    image, _ = random_shapes(
+        image_shape=(imsize,imsize), max_shapes=1, min_shapes=1,
+        num_channels=1, channel_axis=None, shape=shape, min_size=8)
+
     #normalize
     image = (255-image)/255
 
@@ -32,8 +34,10 @@ def make_image_rot(shape, angle, imsize=32):
         size of image
     """
     
-    image, _ = random_shapes((imsize,imsize),max_shapes=1, min_shapes=1, multichannel=False, shape=shape,
-                                min_size=8)
+    image, _ = random_shapes(
+        image_shape=(imsize,imsize),max_shapes=1, min_shapes=1,
+        num_channels=1, channel_axis=None, shape=shape, min_size=8)
+
     #normalize
     image = (255-image)/255
     
