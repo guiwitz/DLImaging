@@ -3,26 +3,24 @@ channels:
   - pytorch
   - conda-forge
 dependencies:
-  - python=3.8
+  - python=3.9
   - pytorch
   - torchvision
-  - pytorch-lightning
   - numpy
   - matplotlib
-  - scikit-image
   - pandas
   - pip
   - jupyter
-  - jupyterlab=2.*
-  - jupyter_contrib_nbextensions
+  - jupyterlab=3.*
   - ipywidgets
-  - seaborn
-  - scikit-learn
-  - captum
-  - nodejs
   - pip:
+    - pytorch-lightning
     - albumentations
+    - captum
     - tqdm
     - opencv-python
     - psutil
-    - jedi==0.17.2
+    - seaborn
+    - scikit-learn
+    - scikit-image
+    - imagecodecs
