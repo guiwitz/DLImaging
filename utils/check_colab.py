@@ -13,6 +13,8 @@ def set_datapath(default_path):
         
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', 
 'pytorch-lightning', '--quiet'])
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 
+'scikit-image==0.19.*', '--quiet'])
         
     else:
         IS_COLAB = False
