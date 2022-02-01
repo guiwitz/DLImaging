@@ -1,4 +1,7 @@
-- file: Readme
+format: jb-book
+root: Readme
+
+chapters:
 - file: notebooks/01-Basics_image_processing
 - file: notebooks/02-Simple_inference_vgg16
 - file: notebooks/03-Tensors
