@@ -22,6 +22,7 @@ jobs:
     # Install pip dependencies
     - name: Install dependencies
       run: |
+        $CONDA/bin/pip install pip -U
         $CONDA/bin/pip install -r requirements.txt
 
     # Show packages
