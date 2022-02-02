@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7. Data augmentation &#8212; Deep Learning for imaging</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,21 +31,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -58,14 +53,17 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="8. Simplifying code with PyTorch-Lightning" href="08-Lightning.html" />
     <link rel="prev" title="6. Handling data" href="06-Data_handling.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -74,25 +72,26 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">Deep Learning for imaging</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Deep Learning for imaging</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Readme.html">
    Deep Learning for imaging
   </a>
  </li>
 </ul>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01-Basics_image_processing.html">
    1. Basics of image handling and processing
@@ -170,6 +169,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -185,21 +185,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -213,20 +213,20 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -245,16 +245,16 @@
     </div>
 </div>
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model-and-training">
    Model and training
@@ -277,16 +277,55 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>7. Data augmentation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-and-training">
+   Model and training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-the-model">
+   Train the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feeding-rotated-data">
+   Feeding rotated data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combine-augmentation">
+   Combine augmentation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="data-augmentation">
+  <p><a class="reference external" href="https://colab.research.google.com/github/guiwitz/DLImaging/blob/master/notebooks/07-Augmentation.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="data-augmentation">
 <h1>7. Data augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this headline">¶</a></h1>
 <p>Until now we have mostly played with synthetic data over which we have full control in terms of number of examples and content. Obviously that’s not the case in the “real world” where you might mostly encounter two problems: 1. not enough training data and 2. inference data that are not exactly matching data used for training. This is where data augmentation can be useful.</p>
 <p>Imagine for example that you trained an algorithm to detect objects in an image that always have the same orientation. However now for your inference the “alignment” of your acquisition system is drifting and objects are slightly rotated. This will make impact the quality of your inference. The way to go around this is to <em>artificially</em> create variations in your training set in the hope to achieve a more general results.</p>
@@ -447,17 +486,17 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch: 0
-accuracy: 0.9956005215644836
-accuracy: 0.9963002800941467
-accuracy: 0.9962005615234375
-accuracy: 0.9953001141548157
-valid_accuracy: 0.9877011179924011
+accuracy: 0.8467020392417908
+accuracy: 0.9599016904830933
+accuracy: 0.9839006662368774
+accuracy: 0.990401029586792
+valid_accuracy: 0.9943005442619324
 epoch: 1
-accuracy: 0.9963001608848572
-accuracy: 0.9982001781463623
-accuracy: 0.9964001178741455
-accuracy: 0.9976000785827637
-valid_accuracy: 0.9973002672195435
+accuracy: 0.9947004318237305
+accuracy: 0.9940004944801331
+accuracy: 0.9943001866340637
+accuracy: 0.997100293636322
+valid_accuracy: 0.9976001977920532
 </pre></div>
 </div>
 </div>
@@ -475,7 +514,7 @@ valid_accuracy: 0.9973002672195435
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">random_shapes</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span><span class="n">max_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;triangle&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">random_shapes</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span><span class="n">max_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;triangle&#39;</span><span class="p">,</span>
                                 <span class="n">min_size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">image</span> <span class="o">=</span> <span class="mi">255</span><span class="o">-</span><span class="n">image</span>
 </pre></div>
@@ -498,7 +537,7 @@ valid_accuracy: 0.9973002672195435
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8ba6a40760&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x142049340&gt;
 </pre></div>
 </div>
 <img alt="../_images/07-Augmentation_13_1.png" src="../_images/07-Augmentation_13_1.png" />
@@ -514,7 +553,7 @@ valid_accuracy: 0.9973002672195435
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_rot</span> <span class="o">=</span> <span class="n">make_image_rot</span><span class="p">(</span><span class="s1">&#39;triangle&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_rot</span> <span class="o">=</span> <span class="n">make_image_rot</span><span class="p">(</span><span class="s1">&#39;triangle&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -526,7 +565,7 @@ valid_accuracy: 0.9973002672195435
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8ba6ee10d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1422c1fd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/07-Augmentation_17_1.png" src="../_images/07-Augmentation_17_1.png" />
@@ -546,7 +585,7 @@ valid_accuracy: 0.9973002672195435
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;triangle&#39;</span><span class="p">,</span> <span class="s1">&#39;circle&#39;</span><span class="p">]</span>
 <span class="n">label_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">im_type</span><span class="p">),(</span><span class="mi">100</span><span class="p">,))</span>
-<span class="n">mybatch_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">make_image_rot</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">label_test</span><span class="p">])</span>
+<span class="n">mybatch_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">make_image_rot</span><span class="p">(</span><span class="n">im_type</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">label_test</span><span class="p">])</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">mybatch_test</span><span class="p">)</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">label_test</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="mi">100</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -554,7 +593,7 @@ valid_accuracy: 0.9973002672195435
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy: 0.7599999904632568
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy: 0.7400000095367432
 </pre></div>
 </div>
 </div>
@@ -619,7 +658,7 @@ valid_accuracy: 0.9973002672195435
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8b87e00a30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1445ac580&gt;
 </pre></div>
 </div>
 <img alt="../_images/07-Augmentation_29_1.png" src="../_images/07-Augmentation_29_1.png" />
@@ -686,35 +725,35 @@ valid_accuracy: 0.9973002672195435
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch: 0
-accuracy: 0.7698005437850952
-accuracy: 0.8865019679069519
-accuracy: 0.9390023350715637
-accuracy: 0.9624016880989075
-valid_accuracy: 0.9409025311470032
+accuracy: 0.7815008759498596
+accuracy: 0.8975019454956055
+accuracy: 0.9447022080421448
+accuracy: 0.9625019431114197
+valid_accuracy: 0.9551023840904236
 epoch: 1
-accuracy: 0.9749013781547546
-accuracy: 0.9795012474060059
-accuracy: 0.9833015203475952
-accuracy: 0.9885005950927734
-valid_accuracy: 0.9738020896911621
+accuracy: 0.9750018119812012
+accuracy: 0.9800010919570923
+accuracy: 0.982601523399353
+accuracy: 0.9864010214805603
+valid_accuracy: 0.9808016419410706
 epoch: 2
-accuracy: 0.9878010749816895
-accuracy: 0.9884010553359985
-accuracy: 0.993100643157959
-accuracy: 0.9924007654190063
-valid_accuracy: 0.987900972366333
+accuracy: 0.9904008507728577
+accuracy: 0.9890009164810181
+accuracy: 0.9899008274078369
+accuracy: 0.9918006062507629
+valid_accuracy: 0.9909006953239441
 epoch: 3
-accuracy: 0.9922006130218506
-accuracy: 0.9935004115104675
-accuracy: 0.9923005104064941
-accuracy: 0.9944003224372864
-valid_accuracy: 0.9867008924484253
+accuracy: 0.9925005435943604
+accuracy: 0.9920004606246948
+accuracy: 0.9920007586479187
+accuracy: 0.99470055103302
+valid_accuracy: 0.9908008575439453
 epoch: 4
-accuracy: 0.9933004379272461
-accuracy: 0.9954003095626831
-accuracy: 0.9947004914283752
-accuracy: 0.9949002861976624
-valid_accuracy: 0.9911008477210999
+accuracy: 0.9935004115104675
+accuracy: 0.9932008385658264
+accuracy: 0.9946005940437317
+accuracy: 0.9941005706787109
+valid_accuracy: 0.9944003224372864
 </pre></div>
 </div>
 </div>
@@ -730,7 +769,7 @@ valid_accuracy: 0.9911008477210999
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy: 0.8899999856948853
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy: 0.8799999952316284
 </pre></div>
 </div>
 </div>
@@ -774,7 +813,7 @@ valid_accuracy: 0.9911008477210999
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8b87ac4460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x144726940&gt;
 </pre></div>
 </div>
 <img alt="../_images/07-Augmentation_37_1.png" src="../_images/07-Augmentation_37_1.png" />
@@ -806,7 +845,7 @@ valid_accuracy: 0.9911008477210999
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8b898e6430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1447a2580&gt;
 </pre></div>
 </div>
 <img alt="../_images/07-Augmentation_40_1.png" src="../_images/07-Augmentation_40_1.png" />
@@ -854,7 +893,7 @@ valid_accuracy: 0.9911008477210999
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8b89a0f6a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x144801820&gt;
 </pre></div>
 </div>
 <img alt="../_images/07-Augmentation_44_1.png" src="../_images/07-Augmentation_44_1.png" />
@@ -885,36 +924,42 @@ valid_accuracy: 0.9911008477210999
 
               </div>
               
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="06-Data_handling.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">6. Handling data</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="08-Lightning.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">8. Simplifying code with PyTorch-Lightning</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
+    <footer class="footer">
+  <p>
     
+      By Guillaume Witz<br/>
     
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="06-Data_handling.html" title="previous page">6. Handling data</a>
-    <a class='right-next' id="next-link" href="08-Lightning.html" title="next page">8. Simplifying code with PyTorch-Lightning</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Guillaume Witz<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>

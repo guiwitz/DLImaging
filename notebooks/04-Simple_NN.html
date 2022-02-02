@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4. Simple neural net with PyTorch &#8212; Deep Learning for imaging</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,21 +31,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -58,14 +53,17 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Training a network" href="05-Training.html" />
     <link rel="prev" title="3. Tensor calculations" href="03-Tensors.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -74,25 +72,26 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">Deep Learning for imaging</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Deep Learning for imaging</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Readme.html">
    Deep Learning for imaging
   </a>
  </li>
 </ul>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01-Basics_image_processing.html">
    1. Basics of image handling and processing
@@ -170,6 +169,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -185,21 +185,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -213,20 +213,20 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -245,16 +245,16 @@
     </div>
 </div>
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#layer-from-torch-nn">
    Layer from torch.nn
@@ -316,16 +316,94 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4. Simple neural net with PyTorch</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#layer-from-torch-nn">
+   Layer from torch.nn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#passing-an-input">
+   Passing an input
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#activation">
+   Activation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure-of-a-network">
+   Structure of a network
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batches">
+     Batches
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#passing-an-image-as-input">
+     Passing an image as input
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#saving-and-loading-a-model">
+   Saving and loading a model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#save-full-model">
+     Save full model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-the-model-state">
+     Saving the model state
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-on-a-gpu-run-on-colab">
+   Running on a GPU (run on Colab)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="simple-neural-net-with-pytorch">
+  <p><a class="reference external" href="https://colab.research.google.com/github/guiwitz/DLImaging/blob/master/notebooks/04-Simple_NN.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="simple-neural-net-with-pytorch">
 <h1>4. Simple neural net with PyTorch<a class="headerlink" href="#simple-neural-net-with-pytorch" title="Permalink to this headline">¶</a></h1>
 <p>Neural networks can be programmed on different levels depending on how much one needs to customize either the architecture or the training pattern. When dealing with more complex NN we will use a higher-level package (Lightning, see <a class="reference internal" href="08-Lightning.html"><span class="doc std std-doc">Chapter 8</span></a>) which will spare us some “manual” work. However, in order to understand all steps involved in designing a DL algorithm, we will first use basic PyTroch. In this notebook we will see howe we can <em>design</em> a NN while in <a class="reference internal" href="05-Training.html"><span class="doc std std-doc">the next notebook</span></a> we will se how to train it.</p>
 <div class="cell tag_hide-input docutils container">
@@ -336,6 +414,11 @@
 <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/guiwitz/DLImaging/master/utils/check_colab.py&#39;</span><span class="p">,</span> <span class="s1">&#39;check_colab.py&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">check_colab</span> <span class="kn">import</span> <span class="n">set_datapath</span>
 <span class="n">colab</span><span class="p">,</span> <span class="n">datapath</span> <span class="o">=</span> <span class="n">set_datapath</span><span class="p">(</span><span class="n">local_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /gdrive
 </pre></div>
 </div>
 </div>
@@ -368,19 +451,19 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
- tensor([[ 0.4421, -0.1145, -0.4361, -0.0684,  0.0085],
-         [ 0.1959, -0.1710, -0.2257,  0.1895,  0.0327],
-         [ 0.1115,  0.2765,  0.2694,  0.0975,  0.0592],
-         [ 0.2784,  0.0342, -0.3286,  0.4176,  0.2712],
-         [-0.1680,  0.0573,  0.2052, -0.2391, -0.3771],
-         [-0.0290,  0.0254,  0.2975, -0.3394,  0.0952],
-         [-0.1575,  0.0856,  0.2010,  0.4332,  0.3322],
-         [ 0.2593, -0.1623,  0.1678, -0.2371,  0.4208],
-         [-0.0882, -0.4169,  0.1692,  0.0767,  0.3568],
-         [-0.3912, -0.4307,  0.3695, -0.0700, -0.2484]], requires_grad=True),
+ tensor([[ 0.1772, -0.2716, -0.0833,  0.4179,  0.0139],
+         [ 0.0236,  0.4233, -0.0906, -0.0667, -0.1381],
+         [ 0.0183,  0.3365, -0.0383, -0.2230,  0.1193],
+         [-0.1372, -0.1642,  0.0699,  0.2822, -0.0746],
+         [-0.4264,  0.3427, -0.1457, -0.4305, -0.0769],
+         [-0.1531, -0.0913,  0.1122, -0.1215, -0.0599],
+         [-0.0187,  0.1361, -0.3873,  0.2272, -0.3454],
+         [-0.3957, -0.3610, -0.0309,  0.3582,  0.2156],
+         [ 0.3501,  0.2927, -0.1047,  0.4398, -0.1033],
+         [ 0.2378,  0.0654, -0.3990, -0.2655,  0.1689]], requires_grad=True),
  Parameter containing:
- tensor([ 0.4386, -0.2198,  0.2719,  0.4018,  0.1458, -0.1378, -0.0716,  0.0652,
-         -0.0754,  0.2645], requires_grad=True)]
+ tensor([-0.2049, -0.0815,  0.4178, -0.3250,  0.3191, -0.3232, -0.1012,  0.0951,
+          0.0309, -0.1550], requires_grad=True)]
 </pre></div>
 </div>
 </div>
@@ -405,7 +488,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 6, 80, 33, 40, 87])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([93, 93, 44, 15, 90])
 </pre></div>
 </div>
 </div>
@@ -419,32 +502,32 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">19</span><span class="o">-</span><span class="mi">6</span><span class="n">ef7c06b0ae8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-7-6ef7c06b0ae8&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lin_layer</span><span class="p">(</span><span class="n">myvector</span><span class="p">)</span>
 
-<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">725</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slow_forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">726</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">727</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span>         <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">729</span>                 <span class="n">_global_forward_hooks</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>                 <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1102</span>             <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span>         <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>         <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
-<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/linear.py</span> in <span class="ni">forward</span><span class="nt">(self, input)</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span> 
-<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">93</span>         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span> 
-<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/modules/linear.py</span> in <span class="ni">forward</span><span class="nt">(self, input)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+<span class="g g-Whitespace">    </span><span class="mi">102</span>     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">103</span>         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> 
+<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 
-<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/functional.py</span> in <span class="ni">linear</span><span class="nt">(input, weight, bias)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1686</span>         <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Tensor</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tens_ops</span><span class="p">])</span> <span class="ow">and</span> <span class="n">has_torch_function</span><span class="p">(</span><span class="n">tens_ops</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1687</span>             <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">tens_ops</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1688</span>     <span class="k">if</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1689</span>         <span class="c1"># fused op is marginally faster</span>
-<span class="g g-Whitespace">   </span><span class="mi">1690</span>         <span class="n">ret</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">addmm</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="o">.</span><span class="n">t</span><span class="p">())</span>
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/functional.py</span> in <span class="ni">linear</span><span class="nt">(input, weight, bias)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1846</span>     <span class="k">if</span> <span class="n">has_torch_function_variadic</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1847</span>         <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">),</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1848</span>     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="o">.</span><span class="n">_nn</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1849</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1850</span> 
 
-<span class="ne">AttributeError</span>: &#39;numpy.ndarray&#39; object has no attribute &#39;dim&#39;
+<span class="ne">TypeError</span>: linear(): argument &#39;input&#39; (position 1) must be Tensor, not numpy.ndarray
 </pre></div>
 </div>
 </div>
@@ -466,7 +549,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 6, 80, 33, 40, 87])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([93, 93, 44, 15, 90])
 </pre></div>
 </div>
 </div>
@@ -480,29 +563,29 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">23</span><span class="o">-</span><span class="mi">4</span><span class="n">eeffe384bb6</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="nn">&lt;ipython-input-10-4eeffe384bb6&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lin_layer</span><span class="p">(</span><span class="n">mytensor</span><span class="p">)</span>
 
-<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">725</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slow_forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">726</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">727</span>             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span>         <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">729</span>                 <span class="n">_global_forward_hooks</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>                 <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1102</span>             <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span>         <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>         <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
-<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/modules/linear.py</span> in <span class="ni">forward</span><span class="nt">(self, input)</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span> 
-<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">93</span>         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span> 
-<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/modules/linear.py</span> in <span class="ni">forward</span><span class="nt">(self, input)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+<span class="g g-Whitespace">    </span><span class="mi">102</span>     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">103</span>         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> 
+<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 
-<span class="nn">~/miniconda3/envs/CASImaging/lib/python3.8/site-packages/torch/nn/functional.py</span> in <span class="ni">linear</span><span class="nt">(input, weight, bias)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1690</span>         <span class="n">ret</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">addmm</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="o">.</span><span class="n">t</span><span class="p">())</span>
-<span class="g g-Whitespace">   </span><span class="mi">1691</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1692</span>         <span class="n">output</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">weight</span><span class="o">.</span><span class="n">t</span><span class="p">())</span>
-<span class="g g-Whitespace">   </span><span class="mi">1693</span>         <span class="k">if</span> <span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1694</span>             <span class="n">output</span> <span class="o">+=</span> <span class="n">bias</span>
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/functional.py</span> in <span class="ni">linear</span><span class="nt">(input, weight, bias)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1846</span>     <span class="k">if</span> <span class="n">has_torch_function_variadic</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1847</span>         <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">),</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1848</span>     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="o">.</span><span class="n">_nn</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1849</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1850</span> 
 
 <span class="ne">RuntimeError</span>: expected scalar type Long but found Float
 </pre></div>
@@ -524,7 +607,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 6., 80., 33., 40., 87.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([93., 93., 44., 15., 90.])
 </pre></div>
 </div>
 </div>
@@ -570,8 +653,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([-22.4567,  -9.7505,  41.0016,  34.2633, -31.8848,   6.2413,  58.6879,
-         21.3043,   5.7423, -48.7560], grad_fn=&lt;AddBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ -5.1316,  24.0661,  39.1124, -27.7620, -27.2561, -25.3290, -33.9091,
+        -46.8651,  52.5092,  21.6992], grad_fn=&lt;AddBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -635,7 +718,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([11.7903,  5.3025,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([4.6315, 0.0000, 0.0000], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -693,24 +776,21 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
- tensor([[ 0.1047,  0.1044,  0.2613, -0.2716, -0.2679,  0.2477, -0.0682,  0.1435,
-           0.2639],
-         [-0.2840,  0.2408, -0.2044, -0.0142,  0.1154,  0.2990, -0.0983,  0.2305,
-          -0.0123],
-         [-0.2136, -0.0986,  0.2338,  0.2958, -0.2440,  0.1098, -0.0837,  0.2535,
-           0.0052],
-         [-0.0964, -0.2258, -0.2928, -0.1824, -0.1456,  0.0328, -0.0191,  0.2514,
-          -0.0937],
-         [-0.2101,  0.2728, -0.2787, -0.3247,  0.2695,  0.0866,  0.2358, -0.0314,
-          -0.0129]], requires_grad=True),
- Parameter containing:
- tensor([ 0.2137, -0.1018, -0.1647, -0.2172, -0.0974], requires_grad=True),
- Parameter containing:
- tensor([[-0.3101, -0.3519, -0.3142, -0.0934,  0.2302],
-         [ 0.2077,  0.2597, -0.3896,  0.0817,  0.4261],
-         [-0.2732,  0.4320, -0.0196,  0.3636,  0.3174]], requires_grad=True),
- Parameter containing:
- tensor([ 0.0113, -0.0240,  0.3221], requires_grad=True)]
+ tensor([[ 0.0483, -0.2518, -0.0089, -0.2222, -0.2226,  0.0678, -0.0117,  0.1295,
+          -0.2652],
+         [ 0.1032,  0.1222,  0.1620, -0.3203,  0.1332,  0.0745, -0.2601,  0.1932,
+           0.0618],
+         [ 0.3046,  0.0502,  0.1105,  0.0564, -0.1664, -0.0811,  0.1039,  0.0440,
+           0.1922],
+         [ 0.0937,  0.2563,  0.1606,  0.1038, -0.0500, -0.2383,  0.1778, -0.0871,
+           0.1092],
+         [-0.3318, -0.2407, -0.0272,  0.2387, -0.2174,  0.1162, -0.1696,  0.2630,
+          -0.3218]], requires_grad=True), Parameter containing:
+ tensor([ 0.1442,  0.3127, -0.3283,  0.2729, -0.2035], requires_grad=True), Parameter containing:
+ tensor([[-0.3275, -0.3544, -0.0413,  0.1119, -0.1094],
+         [-0.3663,  0.0042, -0.4315, -0.1468,  0.0556],
+         [ 0.3742, -0.1017,  0.3442,  0.3889, -0.3229]], requires_grad=True), Parameter containing:
+ tensor([ 0.1876,  0.3002, -0.2017], requires_grad=True)]
 </pre></div>
 </div>
 </div>
@@ -758,23 +838,23 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;layer1.weight&#39;,
-              tensor([[ 0.1047,  0.1044,  0.2613, -0.2716, -0.2679,  0.2477, -0.0682,  0.1435,
-                        0.2639],
-                      [-0.2840,  0.2408, -0.2044, -0.0142,  0.1154,  0.2990, -0.0983,  0.2305,
-                       -0.0123],
-                      [-0.2136, -0.0986,  0.2338,  0.2958, -0.2440,  0.1098, -0.0837,  0.2535,
-                        0.0052],
-                      [-0.0964, -0.2258, -0.2928, -0.1824, -0.1456,  0.0328, -0.0191,  0.2514,
-                       -0.0937],
-                      [-0.2101,  0.2728, -0.2787, -0.3247,  0.2695,  0.0866,  0.2358, -0.0314,
-                       -0.0129]])),
+              tensor([[ 0.0483, -0.2518, -0.0089, -0.2222, -0.2226,  0.0678, -0.0117,  0.1295,
+                       -0.2652],
+                      [ 0.1032,  0.1222,  0.1620, -0.3203,  0.1332,  0.0745, -0.2601,  0.1932,
+                        0.0618],
+                      [ 0.3046,  0.0502,  0.1105,  0.0564, -0.1664, -0.0811,  0.1039,  0.0440,
+                        0.1922],
+                      [ 0.0937,  0.2563,  0.1606,  0.1038, -0.0500, -0.2383,  0.1778, -0.0871,
+                        0.1092],
+                      [-0.3318, -0.2407, -0.0272,  0.2387, -0.2174,  0.1162, -0.1696,  0.2630,
+                       -0.3218]])),
              (&#39;layer1.bias&#39;,
-              tensor([ 0.2137, -0.1018, -0.1647, -0.2172, -0.0974])),
+              tensor([ 0.1442,  0.3127, -0.3283,  0.2729, -0.2035])),
              (&#39;layer2.weight&#39;,
-              tensor([[-0.3101, -0.3519, -0.3142, -0.0934,  0.2302],
-                      [ 0.2077,  0.2597, -0.3896,  0.0817,  0.4261],
-                      [-0.2732,  0.4320, -0.0196,  0.3636,  0.3174]])),
-             (&#39;layer2.bias&#39;, tensor([ 0.0113, -0.0240,  0.3221]))])
+              tensor([[-0.3275, -0.3544, -0.0413,  0.1119, -0.1094],
+                      [-0.3663,  0.0042, -0.4315, -0.1468,  0.0556],
+                      [ 0.3742, -0.1017,  0.3442,  0.3889, -0.3229]])),
+             (&#39;layer2.bias&#39;, tensor([ 0.1876,  0.3002, -0.2017]))])
 </pre></div>
 </div>
 </div>
@@ -801,14 +881,14 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([-0.3026,  0.0631,  0.1009], grad_fn=&lt;AddBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([-0.3433,  0.0139,  0.0470], grad_fn=&lt;AddBackward0&gt;)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="batches">
 <h3>Batches<a class="headerlink" href="#batches" title="Permalink to this headline">¶</a></h3>
-<p>If we want to use batch processing, we can also pass batches of vectors thourgh the network instead of single vectors. PyTroch layers are designed to hanle this by default, so here for example if we want to use a batch of size 32 we can just use a 32 x 8 tensor. We create one directly with <code class="docutils literal notranslate"><span class="pre">torch.randn</span></code>here (we will learn more about batches in the chapter on training):</p>
+<p>If we want to use batch processing, we can also pass batches of vectors thourgh the network instead of single vectors. PyTroch layers are designed to hanle this by default, so here for example if we want to use a batch of size 32 we can just use a 32 x 8 tensor. We create one directly with <code class="docutils literal notranslate"><span class="pre">torch.randn</span></code> here (we will learn more about batches in the chapter on training):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
@@ -858,11 +938,23 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 <p>We create a 32x32 image of a circle. We have multiple options for the number of shapes, their size etc. to select from. We also invert the image (to have the <em>object</em> as foreground):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_circle</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">random_shapes</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span><span class="n">max_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span>
-                                <span class="n">min_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_circle</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">random_shapes</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span><span class="n">max_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span>
+                                <span class="n">num_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">channel_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">image_circle</span> <span class="o">=</span> <span class="mi">255</span><span class="o">-</span><span class="n">image_circle</span>
 
 <span class="n">image_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">image_circle</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_tensor</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([32, 32])
 </pre></div>
 </div>
 </div>
@@ -874,7 +966,7 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04-Simple_NN_61_0.png" src="../_images/04-Simple_NN_61_0.png" />
+<img alt="../_images/04-Simple_NN_62_0.png" src="../_images/04-Simple_NN_62_0.png" />
 </div>
 </div>
 <p>Now we flatten the image:</p>
@@ -913,10 +1005,9 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 10.0429,   6.3756, -16.4639,   4.8029,   6.5702,   4.0158,   2.9788,
-          7.9026,  15.9438,  -5.9477,   0.5380,   6.8684,  12.9330, -13.7665,
-         -9.3215, -16.7994,  -5.6294, -12.9883, -13.6841,   5.4153],
-       grad_fn=&lt;AddBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 0.3483,  2.5287, -0.9607, -0.6729,  0.8906,  0.7305,  2.4549, -1.1527,
+         1.9908, -1.9030, -1.1623, -0.4935,  1.7990,  1.3409, -0.3435, -1.2225,
+        -1.7168,  2.4262,  0.0932, -1.4792], grad_fn=&lt;AddBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -957,9 +1048,9 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([29.8248, 17.1621, 12.0101, 49.9643, 18.4871,  0.0000,  0.0000,  9.6019,
-        21.4851,  0.0000, 33.0883,  0.0000,  0.0000,  0.0000,  8.0017,  0.8017,
-        21.0188,  0.0000,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 0.0000,  0.0000,  0.0000,  0.0000,  4.2747, 12.7591,  0.0000,  0.0000,
+         3.2894,  3.1473,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,
+        14.3413,  7.2331,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -983,7 +1074,7 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 <p>Our next goal will be to train our network (see next chapter). At some point during or after training we will want to save both our model and its weights. This can be done in two ways.</p>
 <div class="section" id="save-full-model">
 <h3>Save full model<a class="headerlink" href="#save-full-model" title="Permalink to this headline">¶</a></h3>
-<p>First, we can save the entire model so that it can be simply reloaded. This is practical when developing but can lead to problems when moving saved models between computers. First we save our model:</p>
+<p>First, we can save the entire model so that it can be simply reloaded. This is practical when developing but can lead to problems when moving saved models between computers. First we save our model (create a <code class="docutils literal notranslate"><span class="pre">models</span></code> folder in your directory if needed):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">second_model</span><span class="p">,</span> <span class="n">datapath</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;models/simpleNN.pt&#39;</span><span class="p">))</span>
@@ -1006,9 +1097,9 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
-         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
-        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 0.0000,  0.0000,  0.0000,  0.0000,  4.2747, 12.7591,  0.0000,  0.0000,
+         3.2894,  3.1473,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,
+        14.3413,  7.2331,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1042,17 +1133,23 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;layer1.weight&#39;,
-              tensor([[ 0.0006,  0.0285, -0.0012,  ..., -0.0120, -0.0017,  0.0108],
-                      [-0.0153, -0.0075, -0.0311,  ..., -0.0122, -0.0052, -0.0173],
-                      [ 0.0219,  0.0307,  0.0298,  ..., -0.0292, -0.0145, -0.0102],
+              tensor([[-6.5818e-03, -1.3050e-05, -2.1981e-02,  ...,  2.0436e-02,
+                       -1.8892e-03, -2.1725e-02],
+                      [ 2.0734e-02, -1.9473e-02, -2.8260e-02,  ...,  2.5199e-02,
+                       -2.9951e-02,  8.9792e-03],
+                      [-1.3109e-03,  1.3450e-02,  1.9928e-02,  ..., -5.7713e-03,
+                        1.0590e-02, -1.9134e-02],
                       ...,
-                      [ 0.0202, -0.0083, -0.0123,  ..., -0.0279,  0.0008, -0.0194],
-                      [-0.0104, -0.0002,  0.0236,  ...,  0.0193, -0.0260,  0.0115],
-                      [-0.0140,  0.0290,  0.0227,  ..., -0.0297,  0.0002, -0.0003]])),
+                      [ 1.6805e-02,  2.3167e-02,  3.1948e-03,  ..., -1.5454e-02,
+                        1.3553e-02, -1.7430e-02],
+                      [-2.3587e-02, -1.8857e-02,  9.4816e-03,  ...,  2.1235e-02,
+                       -2.0854e-02, -2.8723e-02],
+                      [ 2.1510e-03, -4.4486e-03, -1.7398e-02,  ..., -1.2099e-02,
+                        1.0446e-02,  2.7855e-03]])),
              (&#39;layer1.bias&#39;,
-              tensor([-0.0247, -0.0022, -0.0153,  0.0309, -0.0280, -0.0003, -0.0287,  0.0284,
-                      -0.0312,  0.0260, -0.0283, -0.0141, -0.0034, -0.0200, -0.0104, -0.0007,
-                       0.0278,  0.0278, -0.0049,  0.0208]))])
+              tensor([ 0.0084,  0.0012,  0.0020,  0.0185,  0.0250, -0.0038,  0.0236, -0.0299,
+                       0.0036,  0.0277, -0.0210, -0.0126, -0.0142, -0.0256, -0.0099,  0.0236,
+                       0.0120, -0.0239,  0.0216, -0.0094]))])
 </pre></div>
 </div>
 </div>
@@ -1076,9 +1173,9 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
-         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
-        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 0.0000,  0.0000,  0.0000,  0.0000,  4.2747, 12.7591,  0.0000,  0.0000,
+         3.2894,  3.1473,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,
+        14.3413,  7.2331,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1095,7 +1192,7 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -1134,18 +1231,24 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
- tensor([[ 0.0006,  0.0285, -0.0012,  ..., -0.0120, -0.0017,  0.0108],
-         [-0.0153, -0.0075, -0.0311,  ..., -0.0122, -0.0052, -0.0173],
-         [ 0.0219,  0.0307,  0.0298,  ..., -0.0292, -0.0145, -0.0102],
+ tensor([[-6.5818e-03, -1.3050e-05, -2.1981e-02,  ...,  2.0436e-02,
+          -1.8892e-03, -2.1725e-02],
+         [ 2.0734e-02, -1.9473e-02, -2.8260e-02,  ...,  2.5199e-02,
+          -2.9951e-02,  8.9792e-03],
+         [-1.3109e-03,  1.3450e-02,  1.9928e-02,  ..., -5.7713e-03,
+           1.0590e-02, -1.9134e-02],
          ...,
-         [ 0.0202, -0.0083, -0.0123,  ..., -0.0279,  0.0008, -0.0194],
-         [-0.0104, -0.0002,  0.0236,  ...,  0.0193, -0.0260,  0.0115],
-         [-0.0140,  0.0290,  0.0227,  ..., -0.0297,  0.0002, -0.0003]],
-        requires_grad=True),
+         [ 1.6805e-02,  2.3167e-02,  3.1948e-03,  ..., -1.5454e-02,
+           1.3553e-02, -1.7430e-02],
+         [-2.3587e-02, -1.8857e-02,  9.4816e-03,  ...,  2.1235e-02,
+          -2.0854e-02, -2.8723e-02],
+         [ 2.1510e-03, -4.4486e-03, -1.7398e-02,  ..., -1.2099e-02,
+           1.0446e-02,  2.7855e-03]], device=&#39;cuda:0&#39;, requires_grad=True),
  Parameter containing:
- tensor([-0.0247, -0.0022, -0.0153,  0.0309, -0.0280, -0.0003, -0.0287,  0.0284,
-         -0.0312,  0.0260, -0.0283, -0.0141, -0.0034, -0.0200, -0.0104, -0.0007,
-          0.0278,  0.0278, -0.0049,  0.0208], requires_grad=True)]
+ tensor([ 0.0084,  0.0012,  0.0020,  0.0185,  0.0250, -0.0038,  0.0236, -0.0299,
+          0.0036,  0.0277, -0.0210, -0.0126, -0.0142, -0.0256, -0.0099,  0.0236,
+          0.0120, -0.0239,  0.0216, -0.0094], device=&#39;cuda:0&#39;,
+        requires_grad=True)]
 </pre></div>
 </div>
 </div>
@@ -1158,9 +1261,47 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
-         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
-        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-62-3dd5587f259c&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">second_model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>                 <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1102</span>             <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span>         <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>         <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="nn">&lt;ipython-input-44-4a29866e6538&gt;</span> in <span class="ni">forward</span><span class="nt">(self, x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="c1"># define the sequence of operations in the network including e.g. activations</span>
+<span class="ne">---&gt; </span><span class="mi">12</span>         <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> 
+<span class="g g-Whitespace">     </span><span class="mi">14</span>         <span class="k">return</span> <span class="n">x</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/modules/module.py</span> in <span class="ni">_call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>                 <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1102</span>             <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span>         <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>         <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/modules/linear.py</span> in <span class="ni">forward</span><span class="nt">(self, input)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+<span class="g g-Whitespace">    </span><span class="mi">102</span>     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">103</span>         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> 
+<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="k">def</span> <span class="nf">extra_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/torch/nn/functional.py</span> in <span class="ni">linear</span><span class="nt">(input, weight, bias)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1846</span>     <span class="k">if</span> <span class="n">has_torch_function_variadic</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1847</span>         <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">),</span> <span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1848</span>     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="o">.</span><span class="n">_nn</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1849</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1850</span> 
+
+<span class="ne">RuntimeError</span>: Expected all tensors to be on the same device, but found at least two devices, cpu and cuda:0! (when checking argument for argument mat2 in method wrapper_mm)
 </pre></div>
 </div>
 </div>
@@ -1179,7 +1320,7 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
         ...,
         [0., 0., 0.,  ..., 0., 0., 0.],
         [0., 0., 0.,  ..., 0., 0., 0.],
-        [0., 0., 0.,  ..., 0., 0., 0.]])
+        [0., 0., 0.,  ..., 0., 0., 0.]], device=&#39;cuda:0&#39;)
 </pre></div>
 </div>
 </div>
@@ -1205,9 +1346,10 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([58.9915,  0.0000,  0.0000,  0.0000,  0.0000, 30.0834,  0.0000, 30.6602,
-         0.0000,  0.0000,  0.0000,  0.0000, 27.1779,  0.0000, 44.7265,  0.0000,
-        13.0921, 47.9660,  0.0000,  0.0000], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 0.0000,  0.0000,  0.0000,  0.0000,  4.2747, 12.7591,  0.0000,  0.0000,
+         3.2894,  3.1473,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000,
+        14.3413,  7.2331,  0.0000,  0.0000], device=&#39;cuda:0&#39;,
+       grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1220,10 +1362,11 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([58.991543,  0.      ,  0.      ,  0.      ,  0.      , 30.083395,
-        0.      , 30.660238,  0.      ,  0.      ,  0.      ,  0.      ,
-       27.177948,  0.      , 44.726513,  0.      , 13.092113, 47.96598 ,
-        0.      ,  0.      ], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.       ,  0.       ,  0.       ,  0.       ,  4.2747416,
+       12.759116 ,  0.       ,  0.       ,  3.2893572,  3.1472843,
+        0.       ,  0.       ,  0.       ,  0.       ,  0.       ,
+        0.       , 14.341337 ,  7.2330832,  0.       ,  0.       ],
+      dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -1262,36 +1405,42 @@ name: layer2 module: Linear(in_features=5, out_features=3, bias=True)
 
               </div>
               
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="03-Tensors.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">3. Tensor calculations</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05-Training.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5. Training a network</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
+    <footer class="footer">
+  <p>
     
+      By Guillaume Witz<br/>
     
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="03-Tensors.html" title="previous page">3. Tensor calculations</a>
-    <a class='right-next' id="next-link" href="05-Training.html" title="next page">5. Training a network</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Guillaume Witz<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>

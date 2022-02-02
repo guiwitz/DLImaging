@@ -8,13 +8,12 @@ The repository is a course on Deep Learning in imaging based on the PyTorch and 
 3. We show how higher-level libraries such as PyTorch Lightning can simplify some of those steps and provide advantages such as simpler switching to GPU, logging etc.
 4. We dive deeper in the specificities of NN for imaging, in particular convolutional networks, image augmentation, auto-encoders.
 5. After having mostly used classifiers as examples, we explore an other important type of models: segmentation models and build the popular Unet architecture.
-6. We explore a completely different type of advanced architecture, Generative Networks, which allow us to create entirely synthetic data.
 
 In order to simplify the course organisation we mainly use simple synthetic datasets. All notebooks however can be excecuted e.g. on Google Colab where GPUs are available allowing to use larger datasets. We therefore encourage course participants to re-use the material with datasets of their choice.
 
 ## Installation
 
-The necessary packages can easily be installed using conda with the [environment.yml](binder/environment.yml) file to create an envionment:
+The necessary packages can easily be installed locally using conda with the [environment.yml](binder/environment.yml) file to create an environment:
 
 ```
 conda env create -f environment.yml
@@ -29,4 +28,4 @@ jupyter lab
 
 ## Datasets
 
-A link will be provided to download the necessary data. The zip file should be unzipped and put at the same level as the ```notebooks``` folder of this repository for paths to work properly.
+You can find the simple demo datasets on [Zenodo](https://zenodo.org/record/4465181). The data are stored in a zip file that you can directly download with [this link](https://zenodo.org/record/4465181/files/data.zip?download=1). This zip file should be unzipped and put at the same level as the ```notebooks``` folder of this repository for paths to work properly.
